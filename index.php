@@ -1,439 +1,238 @@
-﻿<!DOCTYPE html>
-
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>X Dashboard</title>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <!--CSS and ICONS-->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/style.css" rel="stylesheet" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Mobile first web app. Administration page for a company that allows to monitor departments, employees, and location that the employees and departments resides in">
+  <meta name="author" content="Hafizullah Karim">
 
-    <!-- CDN Bootstrap and fonts-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <title>Company Directory</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet">
+
+  <!-- Fonts From google -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
+
 <body>
 
-    <!-- Top Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Company Directory</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="search-form d-flex ml-auto mt-1 mb-0">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-primary" type="submit">Search</button>
-                </form>
-                <ul class="navbar-nav ml-auto d-flex">
+  <div class="d-flex" id="wrapper">
 
-                    <li class="nav-item dropdown me-2">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Hello Admin
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <!-- Sidebar -->
+      <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading">Company Directory </div>
+        <div class="list-group list-group-flush">
+          <a href="#emp-submenu" class="list-group-item list-group-item-action bg-light nav-link collapsed text-truncate" data-toggle="collapse" data-target="#emp-submenu"> <i class="fa fa-user" aria-hidden="true"></i> <span class="nav-label">Employee</span></a>
+            <div class="collapse" id="emp-submenu" aria-expanded="false">
+              <ul class="flex-column pl-2 nav">
+                <li class="nav-item">
+                  <a class="nav-link p-1" href="#">
+                      <i class="fa fa-fw fa-dashboard"></i> Dashboard </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link p-1" href="#">
+                      <i class="fa fa-fw fa-bar-chart"></i> Edit </a>
+              </li>
+              </ul>
+            </div>
+          <a class="list-group-item list-group-item-action bg-ligh nav-link collapsed text-truncate" href="#dep-submenu" data-toggle="collapse" data-target="#dep-submenu" > <i class="fa fa-home"></i> <span class="nav-label">Departments</span> </a> 
+          <div class="collapse" id="dep-submenu" aria-expanded="false">
+            <ul class="flex-column pl-2 nav">
+              
+              <li class="nav-item">
+                <a class="nav-link p-1" href="#">
+                    <i class="fa fa-fw fa-dashboard"></i> Dashboard </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link p-1" href="#">
+                    <i class="fa fa-fw fa-bar-chart"></i> Edit </a>
+            </li>
+            </ul>
+          </div>
+         
+    
+          <a href="#loc-submenu" class="list-group-item list-group-item-action bg-light nav-link collapsed text-truncate" data-toggle="collapse" data-target="#loc-submenu"> <i  class="fa fa-globe" aria-hidden="true"></i> <span class="nav-label">Employee</span></a>
+          <div class="collapse" id="loc-submenu" aria-expanded="false">
+            <ul class="flex-column pl-2 nav">
+              
+              <li class="nav-item">
+                <a class="nav-link p-1" href="#">
+                    <i class="fa fa-fw fa-dashboard"></i> Dashboard </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link p-1" href="#">
+                    <i class="fa fa-fw fa-bar-chart"></i> Edit </a>
+            </li>
+            </ul>
+          </div>
 
-                            <li><a class="dropdown-item" href="#">Create a new user</a></li>
-                            <li><a class="dropdown-item" href="#">Create a new Location</a></li>
-                            <li><a class="dropdown-item" href="#">Create a new Company</a></li>
+        </div>
+      </div>
+      <!-- /#sidebar-wrapper -->
 
-                        </ul>
-                    </li>
 
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+
+        <nav class="navbar navbar-expand-lg navbar-light  border-bottom"  style="background-color: #e3f2fd;">
+          <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            </ul>
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" id="search_box" placeholder="Search Profile" aria-label="Search">
+                <button class="btn btn-secondary my-2 my-sm-0" data-toggle="modal" data-target="#profileModal" id="search_button" value="Search" type="button">Search</button>
+              </form>
+            </div>
+          </nav>
+            <!-- Employee Table -->
+            <!-- <div class="container" id="mainContent">
+              <div class="container-table" id="mainTable">
+                <table class="table">
+                  <thead style="position: sticky; top: 0" class="header">
+                      <tr>
+                        <th class="header dont-show1" scope="col">Last Name </th>
+                        <th class="header dont-show2" scope="col">First Name </th>
+                        <th class="header dont-show3" scope="col">Deparment  </th>
+                        <th class="header dont-show4" scope="col">Location </th>
+                        <th class="header dont-show5" scope="col">Location </th>
+                        <th class="header dont-show6" scope="col">Profile</th>
+                        <th class="header dont-show7" scope="col">
+                          <button type="button" id="" class="btn btn-secondary add-small" data-toggle="modal" data-target="#addProfileModal">+</button>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody id="tableData" class="read">
+                      <!-- Data will be implemented with jquery/ajax -->
+                 
+
+                    <!-- </tbody> -->
+                  <!-- </table> -->
+
+              <!-- </div> -->
+          <!-- </div> --> 
+
+          <div class="table-responsive-xs">
+            <div class="table-wrapper ">
+              <div class="table-title">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <h2>Manage <b>Employees</b></h2>
+                  </div>
+                  <div class="col-sm-6">
+                    <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
+                    <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
+                  </div>
+                </div>
+              </div>
+              <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th>
+                      <span class="custom-checkbox">
+                        <input type="checkbox" id="selectAll">
+                        <label for="selectAll"></label>
+                      </span>
+                    </th>
+                    <th >Name</th>
+                    <th class="hidden-xs-up">Email</th>  <!-- hidden on xs screen small (<576px )-->
+                    <th >Department</th>
+                    <th>Location</th>
+                    <th >Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                  <tr>
+                    <td>
+                      <span class="custom-checkbox">
+                        <input type="checkbox" id="checkbox5" name="options[]" value="1">
+                        <label for="checkbox5"></label>
+                      </span>
+                    </td>
+                    <td>Martin Blank</td>
+                    <td>martinblank@mail.com</td>
+                    <td>Via Monte Bianco 34, Turin, Italy</td>
+                    <td>(480) 631-2097</td>
+                    <td>
+                      <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                      <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                    </td>
+                  </tr> 
+                </tbody>
+              </table>
+              <div class="clearfix">
+                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                <ul class="pagination">
+                  <li class="page-item disabled"><a href="#">Previous</a></li>
+                  <li class="page-item"><a href="#" class="page-link">1</a></li>
+                  <li class="page-item"><a href="#" class="page-link">2</a></li>
+                  <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                  <li class="page-item"><a href="#" class="page-link">4</a></li>
+                  <li class="page-item"><a href="#" class="page-link">5</a></li>
+                  <li class="page-item"><a href="#" class="page-link">Next</a></li>
                 </ul>
+              </div>
+            </div>
+          </div>        
 
-            </div>
+
         </div>
-    </nav>
-    <!-- End TOP Navbar-->
-    <!-- Employee Table-->
-    <div class="content">
-        <div class="container">
-           
-            <!-- end row -->
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="text-center card-box">
-                        <div class="member-card pt-2 pb-2">
-                            <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
-                            <div class="">
-                                <h4>Freddie J. Plourde</h4>
-                                <p class="text-muted">@Founder <span>| </span><span><a href="#" class="text-pink">websitename.com</a></span></p>
-                            </div>
-                            <ul class="social-links list-inline">
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-                            </ul>
-                            <button type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">Message Now</button>
-                            <div class="mt-4">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>2563</h4>
-                                            <p class="mb-0 text-muted">Wallets Balance</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>6952</h4>
-                                            <p class="mb-0 text-muted">Income amounts</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>1125</h4>
-                                            <p class="mb-0 text-muted">Total Transactions</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end col -->
-                <div class="col-lg-4">
-                    <div class="text-center card-box">
-                        <div class="member-card pt-2 pb-2">
-                            <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
-                            <div class="">
-                                <h4>Julie L. Arsenault</h4>
-                                <p class="text-muted">@Programmer <span>| </span><span><a href="#" class="text-pink">websitename.com</a></span></p>
-                            </div>
-                            <ul class="social-links list-inline">
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-                            </ul>
-                            <button type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">Message Now</button>
-                            <div class="mt-4">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>8471</h4>
-                                            <p class="mb-0 text-muted">Wallets Balance</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>8512</h4>
-                                            <p class="mb-0 text-muted">Income amounts</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>4751</h4>
-                                            <p class="mb-0 text-muted">Total Transactions</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end col -->
-                <div class="col-lg-4">
-                    <div class="text-center card-box">
-                        <div class="member-card pt-2 pb-2">
-                            <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar4.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
-                            <div class="">
-                                <h4>Christopher Gallardo</h4>
-                                <p class="text-muted">@Webdesigner <span>| </span><span><a href="#" class="text-pink">websitename.com</a></span></p>
-                            </div>
-                            <ul class="social-links list-inline">
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-                            </ul>
-                            <button type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">Message Now</button>
-                            <div class="mt-4">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>1021</h4>
-                                            <p class="mb-0 text-muted">Wallets Balance</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>4562</h4>
-                                            <p class="mb-0 text-muted">Income amounts</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>3621</h4>
-                                            <p class="mb-0 text-muted">Total Transactions</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end col -->
-            </div>
-            <!-- end row -->
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="text-center card-box">
-                        <div class="member-card pt-2 pb-2">
-                            <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar5.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
-                            <div class="">
-                                <h4>Joseph M. Rohr</h4>
-                                <p class="text-muted">@Webdesigner <span>| </span><span><a href="#" class="text-pink">websitename.com</a></span></p>
-                            </div>
-                            <ul class="social-links list-inline">
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-                            </ul>
-                            <button type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">Message Now</button>
-                            <div class="mt-4">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>7845</h4>
-                                            <p class="mb-0 text-muted">Wallets Balance</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>1254</h4>
-                                            <p class="mb-0 text-muted">Income amounts</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>5846</h4>
-                                            <p class="mb-0 text-muted">Total Transactions</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end col -->
-                <div class="col-lg-4">
-                    <div class="text-center card-box">
-                        <div class="member-card pt-2 pb-2">
-                            <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
-                            <div class="">
-                                <h4>Mark K. Horne</h4>
-                                <p class="text-muted">@Director <span>| </span><span><a href="#" class="text-pink">websitename.com</a></span></p>
-                            </div>
-                            <ul class="social-links list-inline">
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-                            </ul>
-                            <button type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">Message Now</button>
-                            <div class="mt-4">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>4851</h4>
-                                            <p class="mb-0 text-muted">Wallets Balance</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>10250</h4>
-                                            <p class="mb-0 text-muted">Income amounts</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>895</h4>
-                                            <p class="mb-0 text-muted">Total Transactions</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end col -->
-                <div class="col-lg-4">
-                    <div class="text-center card-box">
-                        <div class="member-card pt-2 pb-2">
-                            <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
-                            <div class="">
-                                <h4>James M. Fonville</h4>
-                                <p class="text-muted">@Manager <span>| </span><span><a href="#" class="text-pink">websitename.com</a></span></p>
-                            </div>
-                            <ul class="social-links list-inline">
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-                            </ul>
-                            <button type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">Message Now</button>
-                            <div class="mt-4">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>4560</h4>
-                                            <p class="mb-0 text-muted">Wallets Balance</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>12350</h4>
-                                            <p class="mb-0 text-muted">Income amounts</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>742</h4>
-                                            <p class="mb-0 text-muted">Total Transactions</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end col -->
-            </div>
-            <!-- end row -->
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="text-center card-box">
-                        <div class="member-card pt-2 pb-2">
-                            <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
-                            <div class="">
-                                <h4>Jade M. Walker</h4>
-                                <p class="text-muted">@Webdeveloper <span>| </span><span><a href="#" class="text-pink">websitename.com</a></span></p>
-                            </div>
-                            <ul class="social-links list-inline">
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-                            </ul>
-                            <button type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">Message Now</button>
-                            <div class="mt-4">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>3520</h4>
-                                            <p class="mb-0 text-muted">Wallets Balance</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>4587</h4>
-                                            <p class="mb-0 text-muted">Income amounts</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>423</h4>
-                                            <p class="mb-0 text-muted">Total Transactions</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end col -->
-                <div class="col-lg-4">
-                    <div class="text-center card-box">
-                        <div class="member-card pt-2 pb-2">
-                            <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
-                            <div class="">
-                                <h4>Mathias L. Lassen</h4>
-                                <p class="text-muted">@Webdesigner <span>| </span><span><a href="#" class="text-pink">websitename.com</a></span></p>
-                            </div>
-                            <ul class="social-links list-inline">
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-                            </ul>
-                            <button type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">Message Now</button>
-                            <div class="mt-4">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>7851</h4>
-                                            <p class="mb-0 text-muted">Wallets Balance</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>10020</h4>
-                                            <p class="mb-0 text-muted">Income amounts</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>1036</h4>
-                                            <p class="mb-0 text-muted">Total Transactions</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end col -->
-                <div class="col-lg-4">
-                    <div class="text-center card-box">
-                        <div class="member-card pt-2 pb-2">
-                            <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
-                            <div class="">
-                                <h4>Alfred M. Bach</h4>
-                                <p class="text-muted">@Manager <span>| </span><span><a href="#" class="text-pink">websitename.com</a></span></p>
-                            </div>
-                            <ul class="social-links list-inline">
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
-                            </ul>
-                            <button type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">Message Now</button>
-                            <div class="mt-4">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>7421</h4>
-                                            <p class="mb-0 text-muted">Wallets Balance</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>14754</h4>
-                                            <p class="mb-0 text-muted">Income amounts</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="mt-3">
-                                            <h4>11525</h4>
-                                            <p class="mb-0 text-muted">Total Transactions</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end col -->
-            </div>
-            <!-- end row -->
-        </div>
-        <!-- container -->
-    </div>
-    <!--End Empployee Table-->
-    <!-- Popper and Bootstrap -->
-    <!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>-->
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> <!--Bootstrap bundle with popper-->
+        <!-- /#page-content-wrapper -->
+
+      </div>
+      <!-- /#wrapper -->
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Menu Toggle Script -->
+    <script>
+      $(document).ready(function(){
+	// Activate tooltip
+	$('[data-toggle="tooltip"]').tooltip();
+	
+	// Select/Deselect checkboxes
+	var checkbox = $('table tbody input[type="checkbox"]');
+	$("#selectAll").click(function(){
+		if(this.checked){
+			checkbox.each(function(){
+				this.checked = true;                        
+			});
+		} else{
+			checkbox.each(function(){
+				this.checked = false;                        
+			});
+		} 
+	});
+	checkbox.click(function(){
+		if(!this.checked){
+			$("#selectAll").prop("checked", false);
+		}
+	});
+});
+      $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+      });
+    </script>
+
 </body>
-</html>
 
+</html>
