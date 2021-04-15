@@ -98,7 +98,6 @@ I will make use of Live search to ensure that the page doesn’t reload and inte
 
 Acceptance of this document will initiate the development of the system. 
  
-Sign off: Paddy Evans 	 
-...............................................................................     Date
 
 
+on the 08/04/2021 the requirement specification was accecpted by Alfred and hence I have initated the development
