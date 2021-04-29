@@ -138,24 +138,9 @@
                     <th >Actions</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="database">
                   
-                  <tr>
-                    <td>
-                      <span class="custom-checkbox">
-                        <input type="checkbox" id="checkbox5" name="options[]" value="1">
-                        <label for="checkbox5"></label>
-                      </span>
-                    </td>
-                    <td>Martin Blank</td>
-                    <td>martinblank@mail.com</td>
-                    <td>Via Monte Bianco 34, Turin, Italy</td>
-                    <td>(480) 631-2097</td>
-                    <td>
-                      <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                      <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                    </td>
-                  </tr> 
+                 
                 </tbody>
               </table>
               <div class="clearfix">

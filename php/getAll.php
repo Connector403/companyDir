@@ -1,9 +1,9 @@
 <?php
 
-	// example use from browser
-	// http://localhost/companydirectory/libs/php/getAll.php
+// 	// example use from browser
+// 	// http://localhost/companydirectory/libs/php/getAll.php
 
-	// remove next two lines for production
+// 	// remove next two lines for production
 	
 	ini_set('display_errors', 'On');
 	error_reporting(E_ALL);
@@ -66,7 +66,8 @@
 	$output['data'] = $data;
 	
 	mysqli_close($conn);
-
+	
 	echo json_encode($output);
+	
 
 ?>

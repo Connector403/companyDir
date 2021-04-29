@@ -8,4 +8,3 @@
 	$cd_dbname = "companydirectory"; // database name
 
 ?>
-x
