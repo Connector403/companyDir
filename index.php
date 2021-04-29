@@ -7,26 +7,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Mobile first web app. Administration page for a company that allows to monitor departments, employees, and location that the employees and departments resides in">
   <meta name="author" content="Hafizullah Karim">
-
   <title>Company Directory</title>
-
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet">
-
   <!-- Fonts From google -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
 </head>
-
 <body>
-
   <div class="d-flex" id="wrapper">
-
       <!-- Sidebar -->
       <div class="bg-light border-right" id="sidebar-wrapper">
         <div class="sidebar-heading">Company Directory </div>
@@ -74,22 +66,16 @@
             </li>
             </ul>
           </div>
-
         </div>
       </div>
       <!-- /#sidebar-wrapper -->
-
-
       <!-- Page Content -->
       <div id="page-content-wrapper">
-
         <nav class="navbar navbar-expand-lg navbar-light  border-bottom"  style="background-color: #e3f2fd;">
           <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
-
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
             </ul>
@@ -119,13 +105,10 @@
                     <tbody id="tableData" class="read">
                       <!-- Data will be implemented with jquery/ajax -->
                  
-
                     <!-- </tbody> -->
                   <!-- </table> -->
-
               <!-- </div> -->
           <!-- </div> --> 
-
           <div class="table-responsive-xs">
             <div class="table-wrapper ">
               <div class="table-title">
@@ -189,19 +172,14 @@
               </div>
             </div>
           </div>        
-
-
         </div>
         <!-- /#page-content-wrapper -->
-
       </div>
       <!-- /#wrapper -->
-
-
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+  <script src="js/main.js"></script>
   <!-- Menu Toggle Script -->
     <script>
       $(document).ready(function(){
@@ -232,7 +210,5 @@
         $("#wrapper").toggleClass("toggled");
       });
     </script>
-
 </body>
-
 </html>

@@ -32,7 +32,7 @@
 
 	}	
 
-	$query = "SELECT * FROM `department`";
+	$query = 'SELECT `id`, `firstName`, `lastName` FROM `personnel`';
 
 	$result = $conn->query($query);
 	
@@ -57,7 +57,7 @@
 
 		array_push($data, $row);
 
-	}
+    }
 
 	$output['status']['code'] = "200";
 	$output['status']['name'] = "ok";

@@ -1,8 +1,5 @@
 <?php
 
-	// example use from browser
-	// http://localhost/companydirectory/libs/php/getAll.php
-
 	// remove next two lines for production
 	
 	ini_set('display_errors', 'On');
@@ -32,7 +29,9 @@
 
 	}	
 
-	$query = "SELECT * FROM `department`";
+
+
+	$query = "SELECT * FROM 'locations'";
 
 	$result = $conn->query($query);
 	
