@@ -32,27 +32,32 @@
           <ul class="flex-column pl-2 nav">
             <li class="nav-item">
               <a class="nav-link p-1" href="#">
-                <i class="fa fa-fw fa-dashboard"></i> Dashboard </a>
+                <!-- <i class="fa fa-plus-circle" aria-hidden="true"></i> Add -->
+              <button type="button" id="" class="btn btn-secondary add-small" data-toggle="modal" data-target="#addProfileModal">
+              <i class="fa fa-plus-circle" aria-hidden="true"></i> Add
+              </button>
+              </a>
+              
             </li>
             <li class="nav-item">
               <a class="nav-link p-1" href="#">
-                <i class="fa fa-fw fa-bar-chart"></i> Edit </a>
+                <i class="fa fa-minus-circle" aria-hidden="true"></i>Remove </a>
             </li>
           </ul>
         </div>
         <a class="list-group-item list-group-item-action bg-ligh nav-link collapsed text-truncate" href="#dep-submenu"
-          data-toggle="collapse" data-target="#dep-submenu"> <i class="fa fa-home"></i> <span
+          data-toggle="collapse" data-target="#dep-submenu"> <i class="fa fa-building" aria-hidden="true"></i> <span
             class="nav-label">Departments</span> </a>
         <div class="collapse" id="dep-submenu" aria-expanded="false">
           <ul class="flex-column pl-2 nav">
 
             <li class="nav-item">
               <a class="nav-link p-1" href="#">
-                <i class="fa fa-fw fa-dashboard"></i> Dashboard </a>
+                <i class="fa fa-plus-circle" aria-hidden="true"></i> Add </a>
             </li>
             <li class="nav-item">
               <a class="nav-link p-1" href="#">
-                <i class="fa fa-fw fa-bar-chart"></i> Edit </a>
+                <i class="fa fa-minus-circle" aria-hidden="true"></i> Remove </a>
             </li>
           </ul>
         </div>
@@ -60,17 +65,17 @@
 
         <a href="#loc-submenu" class="list-group-item list-group-item-action bg-light nav-link collapsed text-truncate"
           data-toggle="collapse" data-target="#loc-submenu"> <i class="fa fa-globe" aria-hidden="true"></i> <span
-            class="nav-label">Employee</span></a>
+            class="nav-label">Location</span></a>
         <div class="collapse" id="loc-submenu" aria-expanded="false">
           <ul class="flex-column pl-2 nav">
 
             <li class="nav-item">
               <a class="nav-link p-1" href="#">
-                <i class="fa fa-fw fa-dashboard"></i> Dashboard </a>
+                <i class="fa fa-plus-circle" aria-hidden="true"></i> Add </a>
             </li>
             <li class="nav-item">
               <a class="nav-link p-1" href="#">
-                <i class="fa fa-fw fa-bar-chart"></i> Edit </a>
+                <i class="fa fa-minus-circle" aria-hidden="true"></i>Remove </a>
             </li>
           </ul>
         </div>
@@ -196,6 +201,76 @@
           </div>
         </div>
       </div>
+
+
+      <!-- Add Profile Modal -->
+      <div class="modal fade" id="addProfileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add Employee Profile</h5>
+            </div>
+            <div class="body-scroll">
+              <div class="modal-body">
+                <br>
+                <form id="addProfile" method="POST">
+                  <div class="form-group">
+                    <label for="firstName">First Name *</label>
+                    <input type="text" class="form-control" id="firstName" aria-describedby="emailHelp" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="secondName">Second Name *</label>
+                    <input type="text" class="form-control" id="secondName" aria-describedby="emailHelp" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="departmentName">Department *</label><br>
+                    <select name="department" id="departmentName" required>
+                      <option></option>
+
+                      ...
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Job Title (Optional)</label>
+                    <input type="text" class="form-control" id="jobTitle" aria-describedby="emailHelp">
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Website (Optional)</label>
+                    <input type="text" class="form-control" id="website" aria-describedby="emailHelp">
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Address (Optional)</label>
+                    <input type="text" class="form-control" id="address" aria-describedby="emailHelp">
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Note (Optional)</label>
+                    <textarea type="text" class="form-control" id="note" aria-describedby="emailHelp"> </textarea>
+                  </div>
+                  <div id="addProfileSuccessMsg">
+                    <p>Data Submitted Successfully</p>
+                  </div>
+                  <br><br>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <div class="form-group">
+                <button type="submit" id="addSubmit" class="btn btn-secondary" name="save">Save Record</button>
+              </div>
+              <br>
+              <br>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
 
 
 

@@ -90,7 +90,7 @@ function loadProfile(profile) {
         '<div class="col-md-6 col-sm-6 col-sx-6">' +
             '<div class="profile-head">' +
                 '<h5>' +profile.firstName + ' ' + profile.lastName + '</h5>'+
-                '<h5>' + profile.department+ '</h5> ' +
+                '<h4>' + profile.department+  '<b>  ' +  profile.location  + '</h4> ' +
             '</div>'+
         '</div>'+
       '</div>'
