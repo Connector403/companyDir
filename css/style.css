@@ -2,7 +2,9 @@
 /*Collapseable sidebar*/
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700');
-
+#profileId {
+	display: none !important;
+}
 #empTable {
 	height: 80vh;
 	overflow-y: scroll;
@@ -260,7 +262,7 @@ table.table .avatar {
 	box-shadow: none;
 	background: #ddd;
 }
-/* Modal styles */
+/* Modal styles
 .modal .modal-dialog {
 	max-width: 400px;
 }
@@ -292,5 +294,54 @@ table.table .avatar {
 }	
 .modal form label {
 	font-weight: normal;
-}
+} */
+
+/* 
+#database {
+	border-collapse: separate;
+	border-spacing: 0;
+  }
+
+
+  
+.profileRow {
+	margin: auto !important;
+	width: 90%;
+	height: 9%;
+  }
+
+
+  .profileRow:nth-child(even) {
+	background-color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .profileRow:nth-child(odd) {
+	background-color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .profileRow * {
+	position: flex;
+	-ms-flex-item-align: center;
+		-ms-grid-row-align: center;
+		align-self: center;
+	font-size: 1em;
+	word-break: break-all;
+	width: 40%;
+  }
+  
+  .profileRow h3 {
+	font-weight: 600;
+  }
+
+
+  .profile {
+	position: fixed;
+	height: 70%;
+	width: 80%;
+	top: 20%;
+	left: 10%;
+	background: #6e44ff;
+	background: linear-gradient(29deg, rgba(110, 68, 255, 0.2) 0%, rgba(10, 211, 255, 0.2) 100%);
+	border-radius: 10px;
+  } */
 

@@ -17,6 +17,33 @@ let profile = {
 
 $(document).ready(function() {
     buildTable();
+    getDeparments();
+    getDeparmentsUpdateProfile();
+
+    $('#addSubmit').submit(function(){
+        add_personnel_data();
+        
+    });
+
+   
+
+    $('#updateProfile').submit(function(){
+        editProfile();
+      
+        buildTable();
+    });
+
+
+    $('#updateProfileModal').on('shown.bs.modal', function() { 
+      
+ 
+        load_update_profile_data();
+      
+        buildTable();
+    });
+
+
+
 })
 
 
@@ -72,7 +99,7 @@ function buildTable() {
 
             var numberOfEntries = 0;
 
-            console.log(db);
+            // console.log(db);
             for (let i in db) {
                 appendEntry(db, i)
                 numberOfEntries++
@@ -90,7 +117,7 @@ function loadProfile(profile) {
         '<div class="col-md-6 col-sm-6 col-sx-6">' +
             '<div class="profile-head">' +
                 '<h5>' +profile.firstName + ' ' + profile.lastName + '</h5>'+
-                '<h4>' + profile.department+  '<b>  ' +  profile.location  + '</h4> ' +
+                
             '</div>'+
         '</div>'+
       '</div>'
@@ -99,59 +126,37 @@ function loadProfile(profile) {
 
     $('#profile-body-001').html(
         '<div class="row">' +
-            '<div class="col-md-12 text-right"' +
-                '<form>' +
-                    '<input type="number" id="profileId" name="id" value="' + profile.id + ' style="display:none"> </input>' +
-                    '<button type="button" id="edit" class="btn btn-secondary small" data-dismiss="modal" data-toggle="modal" data-target="#updateProfileModal"> Edit </button> ' +
-                '</form>'+
-            '</div'+
-        '</div>'+ 
-        '<div class="row">'+
-            '<div class="col-md-4"'+
-                '<label> First Name: </label>'+
-            '</div>'+
-            '<div class="col-md-8">'+
-                '<p>'+ profile.firstName+ '</p>'+
-            '</div>'+
+        '<div class="col-md-12 text-right">' +
+            '<form>' +
+                '<input type="number" id="profileId" name="id" value= "' + profile.id + '" style="display: none"></input>' +
+                '<button type="button" id="edit"  class="btn btn-secondary small" data-dismiss="modal" data-toggle="modal" data-target="#updateProfileModal">Edit</button>' +
+                
+            '</form>' +
+        '</div>' +
+    '</div>' +
+        '<div class="row profileRow">'+
+            '<h3 class="col-5 col-sm-6"> First Name: </h3>'+          
+            '<span class="col-7 col-sm-6" id="firstName">'+ profile.firstName+  '</span>'+
         '</div>'+
-        '<hr>'+
-        '<div class="row">'+
-            '<div class="col-md-4">'+
-                '<label> Last Name: </label>'+
-            '</div>'+
-            '<div class="col-md-8"> '+
-                '<p>'+ profile.lastName + '</p>'+
-            '</div>'+
-        '</div>' +
-        '<hr>' +
-        '<div class="row">' +
-            '<div class="col-md-4">' +
-                '<label>Email:</label>' +
-            '</div>' +
-            '<div class="col-md-8">' +
-                '<p>' + profile.email + '</p>' +
-            '</div>' +
-        '</div>' +
-        '<hr>' +
-        '<div class="row">' +
-            '<div class="col-md-4">' +
-            
-                '<label>Department:</label>' +
-            '</div>' +
-            '<div class="col-md-8">' +
-                '<p>' + profile.department + '</p>' +
-            '</div>' +
-        '</div>' +
-        '<hr>' +
-        '<div class="row">' +
-            '<div class="col-md-4">' +
-                '<label>Location:</label>' +
-            '</div>' +
-            '<div class="col-md-4">' +
-                '<p>' + profile.location +
-            '</div>' +
-        '</div>' +
-        '<div class="row">' +
+        '<div class="row profileRow">'+
+            '<h3 class="col-5 col-sm-6"> Second Name: </h3>'+          
+            '<span class="col-7 col-sm-6" id="lastName">'+ profile.lastName+  '</span>'+
+        '</div>'+
+        '<div class="row profileRow">'+
+            '<h3 class="col-5 col-sm-6"> Job Title: </h3>'+          
+            '<span class="col-7 col-sm-6" id="jobTitle">'+ profile.jobTitle+  '</span>'+
+        '</div>'+
+        '<div class="row profileRow">'+
+            '<h3 class="col-5 col-sm-6"> Department: </h3>'+          
+            '<span class="col-7 col-sm-6" id="department">'+ profile.department+  '</span>'+
+        '</div>'+
+        '<div class="row profileRow">'+
+            '<h3 class="col-5 col-sm-6"> Location : </h3>'+          
+            '<span class="col-7 col-sm-6" id="location">'+ profile.location+  '</span>'+
+        '</div>'+
+        
+       
+        '<div class="row profileRow">' +
             '<div class="col-md-4">' +
             '</div>' +
             '<div class="col-md-4">' +
@@ -163,7 +168,7 @@ function loadProfile(profile) {
         '<div class="row">' +
             '<div class="col-md-12 text-right">' +
                 '<form>' +
-                    '<input type="number" id="profileId" name="id" value= "' + profile.jobTitle+ '" style="display: none"></input>' +
+                    '<input type="number" id="profileId" name="id" value= "' + profile.id + '" style="display: none"></input>' +
                     '<button type="button" id="edit"  class="btn btn-secondary small" data-dismiss="modal" data-toggle="modal" data-target="#updateProfileModal">Edit</button>' +
                 '</form>' +
             '</div>' +
@@ -173,37 +178,13 @@ function loadProfile(profile) {
                 '<label>Job Title:</label>' +
             '</div>' +
             '<div class="col-md-8">' +
-                '<p>' + rowArray[i][6] + '</p>' +
+                '<p>' + profile.jobTitle + '</p>' +
             '</div>' +
         '</div>' +
-        '<hr>' +
-        '<div class="row">' +
-            '<div class="col-md-4">' +
-                '<label>Website:</label>' +
-            '</div>' +
-            '<div class="col-md-8">' +
-                '<p>' + rowArray[i][7] + '</p>' +
-            '</div>' +
-        '</div>' +
-        '<hr>' +
-        '<div class="row">' +
-            '<div class="col-md-4">' +
-                '<label>Address:</label>' +
-            '</div>' +
-            '<div class="col-md-8">' +
-                '<p>' + rowArray[i][8] + '</p>' +
-            '</div>' +
-        '</div>' +
-        '<hr>' +
-        '<div class="row">' +
-            '<div class="col-md-4">' +
-                '<label>Note:</label>' +
-            '</div>' +
-            '<div class="col-md-4">' +
-                '<p>' + rowArray[i][9] + '</p>' +
-            '</div>' +
-        '</div'
+        '<hr>'
     )
+
+  
 
 
     $('#displayName').children().text(`${profile.firstName}  ${profile.lastName}`)
@@ -219,4 +200,193 @@ function loadProfile(profile) {
         updateProfile()
     }
     
+}
+
+
+function getDeparments() {
+
+    $.ajax({
+        type: 'GET',
+        url: 'php/getAllDepartments.php', 
+        dataType: 'json',
+        success: function(data) {
+
+            var db = data.data;
+
+            var option = "";
+
+            // console.log(db);
+            for (let i = 0; i < db.length; i++) {
+                option +=
+                    '<option value"' + db[i].id + '"> ' + db[i].name + '</option>';
+            }
+            $('#addEmployeeDepartment').append(option).select2();
+          
+            // for (let i in db) {
+            //     appendEntry(db, i)
+            //     numberOfEntries++
+            // }
+
+            // $('#entries').html(numberOfEntries)
+
+        }
+    })
+}
+
+
+function getDeparmentsUpdateProfile() {
+
+    $.ajax({
+        type: 'GET',
+        url: 'php/getAllDepartments.php', 
+        dataType: 'json',
+        success: function(data) {
+
+            var db = data.data;
+
+            var option = "";
+
+            // console.log(db);
+            for (let i = 0; i < db.length; i++) {
+                option +=
+                    '<option value"' + db[i].id + '"> ' + db[i].name + '</option>';
+            }
+            $('#addEmployeeDepartment2').append(option).select2();
+          
+            // for (let i in db) {
+            //     appendEntry(db, i)
+            //     numberOfEntries++
+            // }
+
+            // $('#entries').html(numberOfEntries)
+
+        }
+    })
+}
+
+
+
+
+
+
+
+function addEmployee() {
+
+    let departmentName = $('#addEmployeeDepartment').val()
+
+    $.getJSON(`php/getAllDepartments.php`, function (departments) {
+        let departmentID = departments.data.filter(dep => dep.name == departmentName)[0].id
+
+        $.ajax({
+            data: {
+                'firstName': $('#addEmployeeFirstName').val(),
+                'lastName': $('#addEmployeeLastName').val(),
+                'jobTitle': $('#addEmployeeJobTitle').val(),
+                'email': $('#addEmployeeEmail').val(),
+                'departmentID': departmentID
+            },
+            url: 'php/addProfile.php', 
+            dataType: 'json',
+            success: function(data) {
+                
+                clearTable()
+
+                $('#addEmployeeFirstName').val("")
+                $('#addEmployeeLastName').val("")
+                $('#addEmployeeJobTitle').val("")
+                $('#addEmployeeEmail').val("")
+                $('#addEmployeeDepartment').find('option:eq(0)').prop('selected', true);
+
+                $.when($.ajax(
+                    buildTable()
+                ))
+
+    
+            }
+        })
+
+    })
+    
+}
+
+
+function toggleAddDepartment() {
+    populateSelectOptions('Location',"addDepartmentLocation")
+}
+
+function toggleRemoveDepartment() {
+    populateSelectOptions('Department',"removeDepartmentDepartment")  
+}
+
+
+
+function addDepartment() {
+
+    let departmentName = $('#addDepartmentDepartment').val()
+    let locationName = $('#addDepartmentLocation').val()
+
+    $.getJSON(`php/getAllLocations.php`, function (locations) {
+        let locationID = locations.data.filter(loc => loc.name == locationName)[0].id
+       
+
+
+
+        $.ajax({
+            data: {
+                'name': departmentName,
+                'locationID': locationID,
+            },
+            url: 'php/insertDepartment.php', 
+            dataType: 'json',
+            success: function(data) {
+
+                $('#addDepartmentDepartment').val("")
+                $('#addDepartmentLocation').find('option:eq(0)').prop('selected', true);
+                console.log("success Add Department");
+    
+            }
+        })
+    }); 
+
+}
+
+
+function deleteDepartment () {
+    let departmentName = $('#removeDepartmentDepartment').val();
+
+     $.getJSON(`php/getAllDepartments.php`, function (departments) {
+         let departmentID = departments.data.filter(dep => dep.name == departmentName)[0].id;
+         console.log(departmentID);
+
+        $.ajax({
+            url: 'php/deleteDepartmentByID.php',
+            data: {
+                'id': departmentID,
+
+            },
+            dataType: 'json',
+            success: function (data) {
+                $('#removeDepartmentDepartment').find('option:eq(0)').prop('selected', true);
+                console.log('Success Delete');
+            },
+             error: function (dataaaaaaaaaa) {
+                 console.log(data);
+             }
+
+        })
+
+    });
+}
+
+
+
+
+function populateSelectOptions(category, selectID) {
+    $(`#${selectID}`).empty();
+
+    $.getJSON(`php/getAll${category}s.php`, function (category) {
+        $.each(category.data , function (key, entry) {
+            $(`#${selectID}`).append($('<option></option>').attr('value', entry.name).text(entry.name));
+        })
+    }); 
 }
