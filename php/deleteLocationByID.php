@@ -1,7 +1,8 @@
 <?php
 
 	// example use from browser
-	// http://localhost/companydirectory/libs/php/getAll.php
+	// use insertDepartment.php first to create new dummy record and then specify it's id in the command below
+	// http://localhost/companydirectory/libs/php/deleteDepartmentByID.php?id= <id>
 
 	// remove next two lines for production
 	
@@ -32,7 +33,9 @@
 
 	}	
 
-	$query = 'SELECT `id`, `firstName`, `lastName` FROM `personnel`';
+	// $_REQUEST used for development / debugging. Remember to cange to $_POST for production
+
+	$query = 'DELETE FROM location WHERE name = ' ."'".$_REQUEST['name']."'" ;
 
 	$result = $conn->query($query);
 	
@@ -50,20 +53,12 @@
 		exit;
 
 	}
-   
-   	$data = [];
-
-	while ($row = mysqli_fetch_assoc($result)) {
-
-		array_push($data, $row);
-
-    }
 
 	$output['status']['code'] = "200";
 	$output['status']['name'] = "ok";
 	$output['status']['description'] = "success";
 	$output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
-	$output['data'] = $data;
+	$output['data'] = [];
 	
 	mysqli_close($conn);
 

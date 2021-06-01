@@ -1,7 +1,8 @@
 <?php
 
 	// example use from browser
-	// http://localhost/companydirectory/libs/php/insertEmployee.php?firstName=Sam&lastName=Stoppani&jobTitle=SoftwareDeveloper&email=samstoppani@gmail.com&departmentID=10
+	// use insertDepartment.php first to create new dummy record and then specify it's id in the command below
+	// http://localhost/companydirectory/libs/php/deleteDepartmentByID.php?id= <id>
 
 	// remove next two lines for production
 	
@@ -34,14 +35,9 @@
 
 	// $_REQUEST used for development / debugging. Remember to cange to $_POST for production
 
-    // $query = 'INSERT INTO personnel (firstName, lastName, jobTitle, email, departmentID) VALUES("' . $_REQUEST['firstName'] . '","' . $_REQUEST["lastName"] . '","' . $_REQUEST["jobTitle"] . '","' . $_REQUEST["email"] . '",' . $_REQUEST["departmentID"] .')';
-    
-    $query = 'UPDATE personnel SET firstName = "'.$_REQUEST['firstName'].'", lastName = "'.$_REQUEST['lastName'].'", jobTitle = "'.$_REQUEST['jobTitle'].'", email = "'.$_REQUEST['email'].'", departmentID = '.$_REQUEST['departmentID'].' WHERE id = '.$_REQUEST['id'].'';
+	$query = 'DELETE FROM personnel WHERE name = ' ."'".$_REQUEST['name']."'" ;
 
 	$result = $conn->query($query);
-	if (!$conn->query("SET a=1")) {
-		printf("Error message: %s\n", $conn->error);
-	}
 	
 	if (!$result) {
 
@@ -53,7 +49,6 @@
 		mysqli_close($conn);
 
 		echo json_encode($output); 
-		// printf("Error message: %s\n", $conn->error);
 
 		exit;
 

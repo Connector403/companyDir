@@ -6,8 +6,9 @@
 	display: none !important;
 }
 #empTable {
-	height: 80vh;
+	height: 90vh;
 	overflow-y: scroll;
+	width: 100% !important;
 }
   
 @media (max-widthj: 576px) {
@@ -16,6 +17,20 @@
 		display: none !important;
 	}
 	
+}
+
+
+
+#selectBy {
+   height: calc(1.5em + .75rem + 2px);
+   padding: .375rem 1.75rem .375rem .75rem;
+   font-size: 1rem;
+   font-weight: 400;
+   line-height: 1.5;
+   vertical-align: middle;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
 }
 
 .nav-link[data-toggle].collapsed:after {
@@ -71,6 +86,21 @@
 
 
 /* Responsive table that hides element in accordance to screen size */
+
+@media (max-width: 576px) {
+	.hideCell {
+		display: none !important;
+	  }
+	h3 {
+		font-size:  0.9rem;
+	}
+	.modal {
+		position: center;
+	}
+	.table {
+		overflow-y: 
+	}
+}
 body {
 	color: #566787;
 	background: #f5f5f5;
@@ -84,7 +114,7 @@ body {
 	background: #fff;
 	padding: 20px 25px;
 	border-radius: 3px;
-	min-width: 1000px;
+	min-width: 100%;
 	box-shadow: 0 1px 1px rgba(0,0,0,.05);
 }
 .table-title {        

@@ -25,26 +25,27 @@
     <div class="bg-light border-right" id="sidebar-wrapper">
       <div class="sidebar-heading">Company Directory </div>
       <div class="list-group list-group-flush">
-        <!-- Employee CRUD Opt -->
+        <!-- Employee CRUD Options -->
         <a href="#emp-submenu" class="list-group-item list-group-item-action bg-light nav-link collapsed text-truncate"
-        data-toggle="collapse" data-target="#emp-submenu"> <i class="fa fa-user" aria-hidden="true"></i> <span
-          class="nav-label">Employee</span></a>
-      <div class="collapse" id="emp-submenu" aria-expanded="false">
-        <ul class="flex-column pl-2 nav">
-          <li class="nav-item">
-            <a class="nav-link p-1" href="#">
-              <!-- <i class="fa fa-plus-circle" aria-hidden="true"></i> Add -->
-            <button type="button" id="" class="btn btn-secondary add-small" data-toggle="modal" data-target="#addProfileModal">
-            <i class="fa fa-plus-circle" aria-hidden="true"></i> Add
-            </button>
-            </a>
+          data-toggle="collapse" data-target="#emp-submenu"> <i class="fa fa-user" aria-hidden="true"></i> <span
+            class="nav-label">Employee</span></a>
+        <div class="collapse" id="emp-submenu" aria-expanded="false">
+          <ul class="flex-column pl-2 nav">
+            <li class="nav-item">
+              <a class="nav-link p-1" href="#">
+                <!-- <i class="fa fa-plus-circle" aria-hidden="true"></i> Add -->
+                <button type="button" id="" class="btn btn-secondary add-small" data-toggle="modal"
+                  data-target="#addProfileModal">
+                  <i class="fa fa-plus-circle" aria-hidden="true"></i> Add
+                </button>
+              </a>
 
             </li>
-            
+
           </ul>
         </div>
 
-        <!-- Department CRUD Opt -->
+        <!-- Department CRUD Options -->
         <a class="list-group-item list-group-item-action bg-ligh nav-link collapsed text-truncate" href="#dep-submenu"
           data-toggle="collapse" data-target="#dep-submenu"> <i class="fa fa-building" aria-hidden="true"></i> <span
             class="nav-label">Departments</span> </a>
@@ -70,7 +71,7 @@
           </ul>
         </div>
 
-        <!-- Location Crud OPT -->
+        <!-- Location Crud Options -->
         <a href="#loc-submenu" class="list-group-item list-group-item-action bg-light nav-link collapsed text-truncate"
           data-toggle="collapse" data-target="#loc-submenu"> <i class="fa fa-globe" aria-hidden="true"></i> <span
             class="nav-label">Location</span></a>
@@ -79,11 +80,17 @@
 
             <li class="nav-item">
               <a class="nav-link p-1" href="#">
-                <i class="fa fa-plus-circle" aria-hidden="true"></i> Add </a>
+                <button type="button" id="" class="btn btn-secondary add-small" data-toggle="modal"
+                  data-target="#addLocationModal">
+                  <i class="fa fa-plus-circle" aria-hidden="true"></i> Add
+                </button>
             </li>
             <li class="nav-item">
               <a class="nav-link p-1" href="#">
-                <i class="fa fa-minus-circle" aria-hidden="true"></i>Remove </a>
+                <button type="button" id="" class="btn btn-secondary add-small" data-toggle="modal"
+                  data-target="#deleteLocationModal" onclick="toggleDeleteLocation()">
+                  <i class="fa fa-plus-circle" aria-hidden="true"></i> Remove
+                </button>
             </li>
           </ul>
         </div>
@@ -102,10 +109,19 @@
           <ul class="navbar-nav mr-auto">
           </ul>
           <form class="form-inline my-2 my-lg-0">
+     
+              <select id="selectBy" class="filterSelect form-select-lg  my-sm-0 mr-sm-2">
+                  <option value="lastName">Last Name</option>
+                  <option value="firstName">First Name</option>
+                  <option value="jobTitle">Job Title</option>
+                  <option value="department">Department</option>
+                  <option value="location">Location</option>
+              </select>
+ 
             <input class="form-control mr-sm-2" type="search" id="search_box" placeholder="Search Profile"
               aria-label="Search">
-            <button class="btn btn-secondary my-2 my-sm-0" data-toggle="modal" data-target="#profileModal"
-              id="search_button" value="Search" type="button">Search</button>
+            <button class="btn btn-secondary my-2 my-sm-0"
+              id="search_button"  onclick="search()" value="Search" type="button">Search</button>
           </form>
         </div>
       </nav>
@@ -118,8 +134,8 @@
                 <h2>Manage <b>Employees</b></h2>
               </div>
               <div class="col-sm-6">
-                <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i
-                    class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
+                <a href="#addEmployeeModal" class="btn btn-success" data-target="#addProfileModal"  data-toggle="modal"><i
+                    class="material-icons">&#xE147;</i> <span>Add New Employee</span></a> -->
                 <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i
                     class="material-icons">&#xE15C;</i> <span>Delete</span></a>
               </div>
@@ -128,14 +144,15 @@
           <table class="table table-striped table-hover" id="database">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>Action</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th class="hideCell">jobTitle</th> <!-- hidden on xs screen small (<576px )-->
                 <th class="hideCell">Email</th>
                 <th class="hideCell">Department</th>
                 <th class="hideCell">Location</th>
-                <th>Profile</th>
+                
+                <th class="hideCell">ID</th>
               </tr>
             </thead>
             <tbody id="empTbody">
@@ -192,23 +209,24 @@
                     <h3 class="col-5 col-sm-6">Location:</h3>
                     <span class="col-7 col-sm-6" id="location">Leeds</span>
                   </div>
-
-                  <div class="row d-flex align-items-center justify-content-center pt-3">
-                    <div class="col d-flex justify-content-center">
-                      <button class="button blueButton" onclick="returnToTable()">Return</button>
-                    </div>
-                    <div class="col d-flex justify-content-center">
-                      <button class="button orangeButton" id="updateButton"
-                        onclick="toggleProfileUpdate()">Update</button>
-                    </div>
+                  <div class="row profileRow">
+                  
+                    <button type="button" class="btn btn-outline-danger" onclick="deleteEmployee()">
+                      Delete 
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
+                      </svg>
+                  </button>      
+                    
                   </div>
-
                 </div>
-
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <div class="col d-flex justify-content-center">
+                <button id="updateButton" type="button" onclick="toggleProfileUpdate()" class="btn btn-secondary float-left" >Save</button>
+              </div>
+              <button type="button"  onclick="return location.reload();" class="btn btn-secondary pull-right" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
@@ -268,61 +286,71 @@
 
 
 
-      <!-- Update Profile -->
+      <!-- Update Profile Modal
 
       <div class="modal fade" id="updateProfileModal" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content">R
+          <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Update Employee <span id="updateProfileName"></span>
+              <h5 class="modal-title" id="exampleModalLabel">Update <span id="updateProfileName"></span>
                 Profile</h5>
             </div>
             <div class="body-scroll">
               <div class="modal-body">
                 <br>
                 <form id="updateProfile" method="POST">
-                  <div class="form-group">
-                    <label for="firstNameNew">First Name *</label>
-                    <input type="text" class="form-control" id="firstNameNew" name="first-name"
-                      aria-describedby="emailHelp" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="secondNameNew">Second Name *</label>
-                    <input type="text" class="form-control" id="secondNameNew" name="last-name"
-                      aria-describedby="emailHelp" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="emailNew"">Email *</label>
-                              <input type=" email" class="form-control" id="emailNew" name="e-mail"
-                      aria-describedby="emailHelp" required>
-                  </div>
-                  <div class="row profileRow">
-                    <h3 class="col-5 col-sm-6">Department:</h3>
-                    <select id="addEmployeeDepartment2"></select>
-                  </div>
-                  <div class="form-group">
-                    <label for="jobTitleNew">Job Title (Optional)</label>
-                    <input type="text" class="form-control" id="jobTitleNew" name="job-title" value="null">
-                  </div>
+                  <div class="profileUpdate " id="profileUpdate">
 
+                    <div class="row profileTitle" id="displayNameUpdate">
+                      <h2></h2>
+                    </div>
+                    <div class="row profileRow">
+                      <h3 class="col-5 col-sm-6">ID:</h3>
+                      <span class="col-7 col-sm-6" id="idUpdate"></span>
+                    </div>
+                    <div class="row profileRow">
+                      <h3 class="col-5 col-sm-6">First Name:</h3>
+                      <span class="col-7 col-sm-6" id="firstNameUpdate">Hafiz</span>
+                    </div>
+                    <div class="row profileRow">
+                      <h3 class="col-5 col-sm-6">Last Name:</h3>
+                      <span class="col-7 col-sm-6" id="lastNameUpdate">Karim</span>
+                    </div>
+                    <div class="row profileRow">
+                      <h3 class="col-5 col-sm-6">Job Title:</h3>
+                      <span class="col-7 col-sm-6" id="jobTitleUpdate">Software Developer</span>
+                    </div>
+                    <div class="row profileRow">
+                      <h3 class="col-5 col-sm-6">Email:</h3>
+                      <span class="col-7 col-sm-6" id="emailUpdate">hafiz-2010@hotmail.co.uk</span>
+                    </div>
+                    <div class="row profileRow">
+                      <h3 class="col-5 col-sm-6">Department:</h3>
+                      <span class="col-7 col-sm-6" id="departmentUpdate">Development Team</span>
+                    </div>
+                    <div class="row profileRow">
+                      <h3 class="col-5 col-sm-6">Location:</h3>
+                      <span class="col-7 col-sm-6" id="locationUpdate">Leeds</span>
+                    </div>
 
+                  </div>
+                </form>
               </div>
             </div>
             <div class="modal-footer">
               <div class="form-group">
                 <button type="submit" id="editProfileSubmit" class="btn btn-secondary" data-toggle="modal"
-                  data-target="#profileModal" name="save">Save Record</button>
+                  onclick="toggleProfileUpdate()">Update</button>
               </div>
               <br>
               <br>
               <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#profileModal"
                 data-dismiss="modal">Close</button>
-              </form>
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- Add Department -->
       <div class="modal" id="addDepartmentModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -374,6 +402,61 @@
 
               <div class="modal-footer">
                 <button class="button orangeButton" onclick="deleteDepartment()">Remove</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Add Location -->
+
+      <div class="modal" id="addLocationModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Add Department</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <div class="row profileRow">
+                <h3 class="col-5 col-sm-6">Department:</h3>
+                <input id="addLocationLocation">
+              </div>
+
+              <div class="modal-footer">
+
+                <button type="button" class="btn btn-primary" onclick="createLocation()">Create Location</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Remove Location  -->
+
+      <div class="modal" id="deleteLocationModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Remove Department</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <div class="row profileRow">
+                <h3 class="col-5 col-sm-6">Department:</h3>
+                <select id="deleteLocationName">
+                </select>
+              </div>
+
+              <div class="modal-footer">
+                <button class="button orangeButton" onclick="deleteLocation()">Remove</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
             </div>
