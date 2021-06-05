@@ -10,13 +10,13 @@
   <meta name="author" content="Hafizullah Karim">
   <title>Company Directory</title>
   <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrapCSS/bootstrap.min.css" rel="stylesheet">
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet">
   <!-- Fonts From google -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/bootstrapCSS/robot.css">
+  <link rel="stylesheet" href="css/bootstrapCSS/icons.css">
+  <link rel="stylesheet" href="css/bootstrapCSS/fontawesome.css">
 </head>
 
 <body>
@@ -34,7 +34,7 @@
             <li class="nav-item">
               <a class="nav-link p-1" href="#">
                 <!-- <i class="fa fa-plus-circle" aria-hidden="true"></i> Add -->
-                <button type="button" id="" class="btn btn-secondary add-small" data-toggle="modal"
+                <button type="button" id=""  class="btn btn-outline-success btn-sm "data-toggle="modal"
                   data-target="#addProfileModal">
                   <i class="fa fa-plus-circle" aria-hidden="true"></i> Add
                 </button>
@@ -55,7 +55,7 @@
             <li class="nav-item">
               <a class="nav-link p-1" href="#">
                 <!-- <i class="fa fa-plus-circle" aria-hidden="true"></i> Add -->
-                <button type="button" id="" class="btn btn-secondary add-small" data-toggle="modal"
+                <button type="button" id="" class="btn  btn-outline-success btn-sm" data-toggle="modal"
                   data-target="#addDepartmentModal" onclick="toggleAddDepartment()">
                   <i class="fa fa-plus-circle" aria-hidden="true"></i> Add
                 </button>
@@ -63,9 +63,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link p-1" href="#">
-                <button type="button" id="" class="btn btn-secondary add-small" data-toggle="modal"
+                <button type="button" id="" class="btn btn-outline-danger btn-sm" data-toggle="modal"
                   data-target="#removeDepartmentModal" onclick="toggleRemoveDepartment()">
-                  <i class="fa fa-plus-circle" aria-hidden="true"></i> Remove
+                  <i class="fa fa-plus-circle" aria-hidden="true"></i>  Remove
                 </button>
             </li>
           </ul>
@@ -80,16 +80,16 @@
 
             <li class="nav-item">
               <a class="nav-link p-1" href="#">
-                <button type="button" id="" class="btn btn-secondary add-small" data-toggle="modal"
+                <button type="button" id="" class="btn btn-outline-success btn-sm" data-toggle="modal"
                   data-target="#addLocationModal">
-                  <i class="fa fa-plus-circle" aria-hidden="true"></i> Add
+                  <i class="fa fa-plus-circle" aria-hidden="true"></i>  Add
                 </button>
             </li>
             <li class="nav-item">
               <a class="nav-link p-1" href="#">
-                <button type="button" id="" class="btn btn-secondary add-small" data-toggle="modal"
+                <button type="button" id="" class="btn btn-outline-danger btn-sm" data-toggle="modal"
                   data-target="#deleteLocationModal" onclick="toggleDeleteLocation()">
-                  <i class="fa fa-plus-circle" aria-hidden="true"></i> Remove
+                  <i class="fa fa-plus-circle" aria-hidden="true"></i>  Remove
                 </button>
             </li>
           </ul>
@@ -97,13 +97,17 @@
       </div>
     </div>
     <!-- /#sidebar-wrapper -->
+    <!-- Top Navbar -->
     <!-- Page Content -->
     <div id="page-content-wrapper">
       <nav class="navbar navbar-expand-lg navbar-light  border-bottom" style="background-color: #e3f2fd;">
-        <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+        <button class="btn btn-primary" id="menu-toggle"><span class="navbar-toggler-icon"></span></button>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+          <!-- find search icon  -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
@@ -117,14 +121,16 @@
                   <option value="department">Department</option>
                   <option value="location">Location</option>
               </select>
- 
+            <!-- Search Bar -->
             <input class="form-control mr-sm-2" type="search" id="search_box" placeholder="Search Profile"
               aria-label="Search">
-            <button class="btn btn-secondary my-2 my-sm-0"
+            <button class="btn btn-primary"
               id="search_button"  onclick="search()" value="Search" type="button">Search</button>
+             
           </form>
         </div>
       </nav>
+
       <!-- Employee Table -->
       <div id="empTable" class="table-responsive-xs">
         <div class="table-wrapper ">
@@ -135,9 +141,8 @@
               </div>
               <div class="col-sm-6">
                 <a href="#addEmployeeModal" class="btn btn-success" data-target="#addProfileModal"  data-toggle="modal"><i
-                    class="material-icons">&#xE147;</i> <span>Add New Employee</span></a> -->
-                <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i
-                    class="material-icons">&#xE15C;</i> <span>Delete</span></a>
+                    class="material-icons">&#xE147;</i> <span>Add New Employee</span></a> 
+                
               </div>
             </div>
           </div>
@@ -176,57 +181,54 @@
 
             </div>
             <div class="body-scroll">
-              <div class="modal-body">
+              <div class="modal-body" id="profilemodalBody">
                 <div class="profile" id="profile">
                   <div class="row profileTitle" id="displayName">
                     <h2>Hafiz Karim</h2>
                   </div>
                   <div class="row profileRow">
-                    <h3 class="col-5 col-sm-6">ID:</h3>
+                    <h5 class="col-5 col-sm-6">ID:</h3>
                     <span class="col-7 col-sm-6" id="id"></span>
                   </div>
+                 
                   <div class="row profileRow">
-                    <h3 class="col-5 col-sm-6">First Name:</h3>
+                    <h5 class="col-5 col-sm-6">First Name:</h3>
                     <span class="col-7 col-sm-6" id="firstName">Hafiz</span>
                   </div>
                   <div class="row profileRow">
-                    <h3 class="col-5 col-sm-6">Last Name:</h3>
+                    <h5 class="col-5 col-sm-6">Last Name:</h3>
                     <span class="col-7 col-sm-6" id="lastName">Karim</span>
                   </div>
                   <div class="row profileRow">
-                    <h3 class="col-5 col-sm-6">Job Title:</h3>
+                    <h5 class="col-5 col-sm-6">Job Title:</h3>
                     <span class="col-7 col-sm-6" id="jobTitle">Software Developer</span>
                   </div>
                   <div class="row profileRow">
-                    <h3 class="col-5 col-sm-6">Email:</h3>
+                    <h5 class="col-5 col-sm-6">Email:</h3>
                     <span class="col-7 col-sm-6" id="email">hafiz-2010@hotmail.co.uk</span>
                   </div>
                   <div class="row profileRow">
-                    <h3 class="col-5 col-sm-6">Department:</h3>
+                    <h5 class="col-5 col-sm-6">Department:</h3>
                     <span class="col-7 col-sm-6" id="department">Development Team</span>
                   </div>
                   <div class="row profileRow">
-                    <h3 class="col-5 col-sm-6">Location:</h3>
+                    <h5 class="col-5 col-sm-6">Location:</h3>
                     <span class="col-7 col-sm-6" id="location">Leeds</span>
                   </div>
-                  <div class="row profileRow">
+                  <div class="row profileRow deleteCellROW">
+                    <!-- Delete Employee Button -->
+                 </div> 
+                
                   
-                    <button type="button" class="btn btn-outline-danger" onclick="deleteEmployee()">
-                      Delete 
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x-fill" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
-                      </svg>
-                  </button>      
-                    
-                  </div>
                 </div>
+               
               </div>
             </div>
             <div class="modal-footer">
-              <div class="col d-flex justify-content-center">
-                <button id="updateButton" type="button" onclick="toggleProfileUpdate()" class="btn btn-secondary float-left" >Save</button>
-              </div>
+             
               <button type="button"  onclick="return location.reload();" class="btn btn-secondary pull-right" data-dismiss="modal">Close</button>
+              <button id="updateButton" type="button" onclick="toggleProfileUpdate()" class="btn btn-secondary float-left" >Save</button>
+              
             </div>
           </div>
         </div>
@@ -245,7 +247,7 @@
               <h5 class="modal-title" id="exampleModalLabel">Add Employee Profile</h5>
             </div>
             <div class="body-scroll">
-              <div class="modal-body">
+              <div class="modal-body" id="addProfileBody">
                 <form id="addProfile" method="POST">
                   <div class="row profileRow">
                     <h3 class="col-5 col-sm-6">First Name:</h3>
@@ -273,12 +275,35 @@
             <div class="modal-footer">
 
               <div class="form-group">
-                <button class="button orangeButton" onclick="addEmployee()">Add</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
               <br>
+              <button id="addEmployButtons" class="btn btn-primary" onclick="addEmployee()">Add</button>
               <br>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="alert-box success">Successfull added new Employee Record!</div>
+
+      <!-- Delete profile modal -->
+      <div class="modal" id="deleteEmpModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modaltitle">Delete Employee</h5>
+            </div>
+            <div class="modal-body">
+              <p id="deleteText"> Please Confirm You want to delete!</p>
+              <i style="display: none;"class="material-icons successModalSymbol" id="deleteCompleteSymbol">check_circle</i>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" id="noButton" data-dismiss="modal"><i class="material-icons" id="cross">cancel</i> No</button>
+              <button type="button" class="btn btn-success" id="yesButton" onclick="deleteEmployee()">
+                <i class="material-icons" id="tick">
+                  done</i> Yes
+              </button>
             </div>
           </div>
         </div>
@@ -295,22 +320,25 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" id="addDepartmentBody">
+              <div class="departmentModalBody">
+                <div class="row profileRow">
+                  <h3 class="col-5 col-sm-6">Department:</h3>
+                  <input id="addDepartmentDepartment">
+                </div>
+                <div class="row profileRow">
+                  <h3 class="col-5 col-sm-6">Location:</h3>
+                  <select id="addDepartmentLocation"></select>
+                </div>
 
-              <div class="row profileRow">
-                <h3 class="col-5 col-sm-6">Department:</h3>
-                <input id="addDepartmentDepartment">
-              </div>
-              <div class="row profileRow">
-                <h3 class="col-5 col-sm-6">Location:</h3>
-                <select id="addDepartmentLocation"></select>
               </div>
 
-              <div class="modal-footer">
 
-                <button type="button" class="btn btn-primary" onclick="addDepartment()">Save changes</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              </div>
+            </div>
+            <div class="modal-footer">
+
+              <button id="closeDepartment" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button id="addDeparmentButton" type="button" class="btn btn-primary" onclick="addDepartment()">Save changes</button>
             </div>
           </div>
         </div>
@@ -335,9 +363,30 @@
               </div>
 
               <div class="modal-footer">
-                <button class="button orangeButton" onclick="deleteDepartment()">Remove</button>
+                <!-- <button class="button orangeButton" onclick="deleteDepartment()">Remove</button> -->
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn btn-outline-danger"  data-dismiss="modal" data-toggle="modal" data-target="#confirmDeleteDepartmentModal" onclick="toggleDeleteDepartmentConfirm()">Remove</button>
+                
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Confirm Remove Departments -->
+
+      <div class="modal" id="confirmDeleteDepartmentModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Remove Department Confirmation </h5>
+            </div>
+            <div class="modal-body">
+              <p id="deleteTextDepartment"></p>
+              <i class="material-icons successModalSymbol" id="deleteCompleteSymbolDepartment">check_circle</i>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" id="noButtonDepartment" data-dismiss="modal"><i class="material-icons" id="cross">cancel</i> No</button>
+              <button type="button" class="btn btn-outline-danger" id="yesButtonDepartment" onclick="deleteDepartment()"><i class="material-icons" id="tick">done</i> Yes</button>
             </div>
           </div>
         </div>
@@ -353,18 +402,20 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" id="addLocationModalBody">
+              <div class="addLocationBody"> 
 
-              <div class="row profileRow">
-                <h3 class="col-5 col-sm-6">Department:</h3>
-                <input id="addLocationLocation">
+                <div class="row profileRow">
+                  <h3 class="col-5 col-sm-6">Department:</h3>
+                  <input id="addLocationLocation">
+                </div>
               </div>
 
-              <div class="modal-footer">
+            </div>
+            <div class="modal-footer">
 
-                <button type="button" class="btn btn-primary" onclick="createLocation()">Create Location</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              </div>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button id="addLocationButton" type="button" class="btn btn-primary" onclick="createLocation()">Create Location</button>
             </div>
           </div>
         </div>
@@ -376,7 +427,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Remove Department</h5>
+              <h5 class="modal-title">Remove Location</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -390,13 +441,42 @@
               </div>
 
               <div class="modal-footer">
-                <button class="button orangeButton" onclick="deleteLocation()">Remove</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn btn-outline-danger" data-dismiss="modal" data-toggle="modal" data-target="#confirmDeleteLocationModal" onclick="toggleDeleteLocationConfirm()">Remove</button>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <!-- Confirm Delete Location -->
+
+      <div class="modal" id="confirmDeleteLocationModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Remove Department Confirmation </h5>
+            </div>
+            <div class="modal-body">
+              <p id="deleteTextLocation"></p>
+              <i class="material-icons successModalSymbol" id="deleteCompleteSymbolLocation">check_circle</i>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" id="noButtonLocation" data-dismiss="modal"><i class="material-icons" id="cross">cancel</i> No</button>
+              <button type="button" class="btn btn-outline-danger" id="yesButtonLocation" onclick="deleteLocation()"><i class="material-icons" id="tick">done</i> Yes</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Hafiz Karim</span>
+          </div>
+        </div>
+      </footer>
 
 
 
@@ -406,40 +486,13 @@
       <!-- /#page-content-wrapper -->
       <!-- /#wrapper -->
       <!-- Bootstrap core JavaScript -->
-      <script src="vendor/jquery/jquery.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-      <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="js/jquery/jquery.min.js"></script>
+      <script src="js/selec2.js"></script>
+    
+      <script src="js/bootstrapJS/bootstrap.bundle.min.js"></script>
       <script src="js/main.js"></script>
-      <!-- Menu Toggle Script -->
-      <script>
-        $(document).ready(function () {
-          // Activate tooltip
-          $('[data-toggle="tooltip"]').tooltip();
-
-          // Select/Deselect checkboxes
-          var checkbox = $('table tbody input[type="checkbox"]');
-          $("#selectAll").click(function () {
-            if (this.checked) {
-              checkbox.each(function () {
-                this.checked = true;
-              });
-            } else {
-              checkbox.each(function () {
-                this.checked = false;
-              });
-            }
-          });
-          checkbox.click(function () {
-            if (!this.checked) {
-              $("#selectAll").prop("checked", false);
-            }
-          });
-        });
-        $("#menu-toggle").click(function (e) {
-          e.preventDefault();
-          $("#wrapper").toggleClass("toggled");
-        });
-      </script>
+    
+     
 </body>
 
 </html>
