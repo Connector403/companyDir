@@ -471,6 +471,10 @@ $('#search_button').click(function(){
 $('#closeModalProfileButton').click(function(){
     return location.reload();
 })
+
+$('#noButtonAddeDpartment').click(function() {
+    return location.reload();
+})
 $('#addEmployButtons').click(function(){
     addEmployee();
 })
