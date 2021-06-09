@@ -154,6 +154,12 @@ function loadProfile(profile) {
 }
 // Start update Profile 
 
+
+$('#updateButton').click(function(){
+    // toggleProfileUpdate();
+    updateProfileInfo();
+})
+
 // when update button is pressedn on profile modal 
 function toggleProfileUpdate() {
 
