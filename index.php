@@ -55,16 +55,16 @@
             <li class="nav-item">
               <a class="nav-link p-1" href="#">
                 <!-- <i class="fa fa-plus-circle" aria-hidden="true"></i> Add -->
-                <button type="button" id="" class="btn  btn-outline-success btn-sm" data-toggle="modal"
-                  data-target="#addDepartmentModal" onclick="toggleAddDepartment()">
+                <button type="button" id="toggleAddDepartmentButton" class="btn  btn-outline-success btn-sm" data-toggle="modal"
+                  data-target="#addDepartmentModal">
                   <i class="fa fa-plus-circle" aria-hidden="true"></i> Add
                 </button>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link p-1" href="#">
-                <button type="button" id="" class="btn btn-outline-danger btn-sm" data-toggle="modal"
-                  data-target="#removeDepartmentModal" onclick="toggleRemoveDepartment()">
+                <button type="button" id="toggleRemoveDepartmentButton" class="btn btn-outline-danger btn-sm" data-toggle="modal"
+                  data-target="#removeDepartmentModal" >
                   <i class="fa fa-plus-circle" aria-hidden="true"></i>  Remove
                 </button>
             </li>
@@ -87,8 +87,8 @@
             </li>
             <li class="nav-item">
               <a class="nav-link p-1" href="#">
-                <button type="button" id="" class="btn btn-outline-danger btn-sm" data-toggle="modal"
-                  data-target="#deleteLocationModal" onclick="toggleDeleteLocation()">
+                <button type="button" id="toggleDeleteLocationButton" class="btn btn-outline-danger btn-sm" data-toggle="modal"
+                  data-target="#deleteLocationModal" >
                   <i class="fa fa-plus-circle" aria-hidden="true"></i>  Remove
                 </button>
             </li>
@@ -125,7 +125,7 @@
             <input class="form-control mr-sm-2" type="search" id="search_box" placeholder="Search Profile"
               aria-label="Search">
             <button class="btn btn-primary"
-              id="search_button"  onclick="search()" value="Search" type="button">Search</button>
+              id="search_button"  value="Search" type="button">Search</button>
              
           </form>
         </div>
@@ -226,7 +226,7 @@
             </div>
             <div class="modal-footer">
              
-              <button type="button"  onclick="return location.reload();" class="btn btn-secondary pull-right" data-dismiss="modal">Close</button>
+              <button type="button"  id="closeModalProfileButton"class="btn btn-secondary pull-right" data-dismiss="modal">Close</button>
               <button id="updateButton" type="button" onclick="toggleProfileUpdate()" class="btn btn-secondary float-left" >Save</button>
               
             </div>
@@ -278,7 +278,7 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
               <br>
-              <button id="addEmployButtons" class="btn btn-primary" onclick="addEmployee()">Add</button>
+              <button id="addEmployButtons" class="btn btn-primary" >Add</button>
               <br>
               </form>
             </div>
@@ -300,7 +300,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" id="noButton" data-dismiss="modal"><i class="material-icons" id="cross">cancel</i> No</button>
-              <button type="button" class="btn btn-success" id="yesButton" onclick="deleteEmployee()">
+              <button type="button" class="btn btn-success" id="yesButton">
                 <i class="material-icons" id="tick">
                   done</i> Yes
               </button>
@@ -338,7 +338,28 @@
             <div class="modal-footer">
 
               <button id="closeDepartment" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button id="addDeparmentButton" type="button" class="btn btn-primary" onclick="addDepartment()">Save changes</button>
+              <!-- <button id="addDeparmentButton" type="button" class="btn btn-primary" onclick="addDepartment()">Save changes</button> -->
+              <button id="toggleAddDepartmentConfirmButton" class="btn btn-primary"  data-dismiss="modal" data-toggle="modal" data-target="#confirmAddDepartmentModal">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Confirm add Department  -->
+      <div class="modal" id="confirmAddDepartmentModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Add Department Confirmation </h5>
+            </div>
+            <div class="modal-body">
+              <p id="addTextDepartment"></p>
+              <i class="material-icons successModalSymbol" id="addCompleteSymbolDepartment">check_circle</i>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" id="noButtonAddeDpartment" data-dismiss="modal"><i class="material-icons" id="cross">cancel</i> No</button>
+              <button type="button" class="btn btn-outline-danger" id="yesButtonAddDepartment"><i class="material-icons" id="tick">done</i> Yes</button>
             </div>
           </div>
         </div>
@@ -363,9 +384,9 @@
               </div>
 
               <div class="modal-footer">
-                <!-- <button class="button orangeButton" onclick="deleteDepartment()">Remove</button> -->
+              
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button class="btn btn-outline-danger"  data-dismiss="modal" data-toggle="modal" data-target="#confirmDeleteDepartmentModal" onclick="toggleDeleteDepartmentConfirm()">Remove</button>
+                <button id="toggleDeleteDepartmentConfirmButton" class="btn btn-outline-danger"  data-dismiss="modal" data-toggle="modal" data-target="#confirmDeleteDepartmentModal">Remove</button>
                 
               </div>
             </div>
@@ -386,7 +407,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" id="noButtonDepartment" data-dismiss="modal"><i class="material-icons" id="cross">cancel</i> No</button>
-              <button type="button" class="btn btn-outline-danger" id="yesButtonDepartment" onclick="deleteDepartment()"><i class="material-icons" id="tick">done</i> Yes</button>
+              <button type="button" class="btn btn-outline-danger" id="yesButtonDepartment"><i class="material-icons" id="tick">done</i> Yes</button>
             </div>
           </div>
         </div>
@@ -397,7 +418,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Add Department</h5>
+              <h5 class="modal-title">Add Location</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -406,7 +427,7 @@
               <div class="addLocationBody"> 
 
                 <div class="row profileRow">
-                  <h3 class="col-5 col-sm-6">Department:</h3>
+                  <h3 class="col-5 col-sm-6">New Location:</h3>
                   <input id="addLocationLocation">
                 </div>
               </div>
@@ -415,7 +436,7 @@
             <div class="modal-footer">
 
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button id="addLocationButton" type="button" class="btn btn-primary" onclick="createLocation()">Create Location</button>
+              <button id="addLocationButton" type="button" class="btn btn-primary">Create Location</button>
             </div>
           </div>
         </div>
@@ -435,14 +456,14 @@
             <div class="modal-body">
 
               <div class="row profileRow">
-                <h3 class="col-5 col-sm-6">Department:</h3>
+                <h3 class="col-5 col-sm-6">Location:</h3>
                 <select id="deleteLocationName">
                 </select>
               </div>
 
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button class="btn btn-outline-danger" data-dismiss="modal" data-toggle="modal" data-target="#confirmDeleteLocationModal" onclick="toggleDeleteLocationConfirm()">Remove</button>
+                <button class="btn btn-outline-danger" id="toggleDeleteLocationConfirmButton"  data-dismiss="modal" data-toggle="modal" data-target="#confirmDeleteLocationModal">Remove</button>
               </div>
             </div>
           </div>
@@ -454,7 +475,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Remove Department Confirmation </h5>
+              <h5 class="modal-title">Remove Location Confirmation! </h5>
             </div>
             <div class="modal-body">
               <p id="deleteTextLocation"></p>
@@ -462,7 +483,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" id="noButtonLocation" data-dismiss="modal"><i class="material-icons" id="cross">cancel</i> No</button>
-              <button type="button" class="btn btn-outline-danger" id="yesButtonLocation" onclick="deleteLocation()"><i class="material-icons" id="tick">done</i> Yes</button>
+              <button type="button" class="btn btn-outline-danger" id="yesButtonLocation"><i class="material-icons" id="tick">done</i> Yes</button>
             </div>
           </div>
           

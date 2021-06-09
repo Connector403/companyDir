@@ -436,34 +436,91 @@ function clearTable() {
 }
 
 
-function toggleAddDepartment() {
+$('#toggleAddDepartmentButton').click(function(){
     populateSelectOptions('Location', "addDepartmentLocation");
-}
+})
 
-function toggleRemoveDepartment() {
+
+
+$('#toggleRemoveDepartmentButton').click(function(){
     populateSelectOptions('Department', "removeDepartmentDepartment");
-}
-function toggleDeleteLocation() {
- 
-    populateSelectOptions('Location', 'deleteLocationName');
-}
+})
+// function toggleAddDepartment() {
+    
+// }
 
-$('#addDeparmentButton').click(function(){
-    $('#departmentModalBody').hide();
+// function toggleRemoveDepartment() {
+    
+// }
+// function toggleDeleteLocation() {
+ 
+   
+// }
+
+$('#toggleDeleteLocationButton').click(function(){
+    populateSelectOptions('Location', 'deleteLocationName');
 
 })
 
-function addDepartment() {
+// searcgh
+$('#search_button').click(function(){
+    search();
+})
 
-    let departmentName = $('#addDepartmentDepartment').val()
-    let locationName = $('#addDepartmentLocation').val()
 
+$('#closeModalProfileButton').click(function(){
+    return location.reload();
+})
+$('#addEmployButtons').click(function(){
+    addEmployee();
+})
+
+// Delete Profile Modal Confirmatioon
+$('#yesButton').click(function(){
+    deleteEmployee();
+})
+
+// Remove Departments 
+$('#toggleDeleteDepartmentConfirmButton').click(function(){
+    toggleDeleteDepartmentConfirm();
+
+})
+
+// Confirm Remove Department Modal 
+$('#yesButtonDepartment').click(function(){
+    deleteDepartment();
+})
+
+
+// add location 
+$('#addLocationButton').click(function(){
+    createLocation();
+})
+
+// remove location 
+$('#toggleDeleteLocationConfirmButton').click(function(){
+    toggleDeleteLocationConfirm();
+})
+
+// confirm Delete Location 
+
+$('#yesButtonLocation').click(function(){
+    deleteLocation();
+})
+
+$('#toggleAddDepartmentConfirmButton').click(function() {
+    $('#addTextDepartment').html("Are you sure you want to add a new dapartment?");
+})
+
+// adding Department 
+$('#yesButtonAddDepartment').click(function(){
+    $('#departmentModalBody').hide();
+    let departmentName = $('#addDepartmentDepartment').val();
+    let locationName = $('#addDepartmentLocation').val();
     $.getJSON(`php/getAllLocations.php`, function (locations) {
         let locationID = locations.data.filter(loc => loc.name == locationName)[0].id
 
-
-
-
+        
         $.ajax({
             data: {
                 'name': departmentName,
@@ -473,25 +530,30 @@ function addDepartment() {
             dataType: 'json',
             success: function (data) {
 
-                $('#addDepartmentBody').html(`<div class="alert alert-success">
-                <h4 class="alert-heading">New Department Successfully Created! </h4>
-                <p> You have successfully Added the ${departmentName}!</p>
-                <hr>
-                <p class="mb-0"> You can now return the menu </p>
-            </div>`);
-               $('#addDeparmentButton').hide();
-               $('#closeDepartment').show();
+
+                clearTable();
+                buildTable();
+                $('#addTextDepartment').html(`<strong>${departmentName}</strong> at <strong> ${locationName}</strong> has been added successfully`);
+                // tempDeleteLocationName = $('#deleteLocationName').val();
+                $('#yesButtonAddDepartment').hide();
+                $('#noButtonAddeDpartment').html("Close");
+               
+                $('#addCompleteSymbolDepartment').show();
+                console.log(`Location ${departmentName} Added`);
+            
+           
 
 
-                $('#addDepartmentDepartment').val("")
-                $('#addDepartmentLocation').find('option:eq(0)').prop('selected', true);
-                console.log("success Add Department");
+                $('#removeDepartmentDepartment').find('option:eq(0)').prop('selected', true);
+                console.log('Success Delete');
 
             }
         })
     });
 
-}
+})
+
+
 function toggleDeleteDepartmentConfirm(){
     $('#deleteTextDepartment').html('Are you sure you want to delete the record from the database?');
     // console.log(tempDeleteLocationName);
