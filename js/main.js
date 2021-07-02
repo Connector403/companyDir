@@ -124,18 +124,21 @@ function appendEntry(db, i, filterBy) {
     $('#database tbody').append(`
         <tr>
             <td class="tile_div"> 
+                <div class="center"> 
+                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#persProfileModal" id="${db[i].id}" onclick="showPerson(event, ${JSON.stringify(db[i]).split('"').join("&quot;")})">
+                    <img src="img/person-lines-fill.svg">
+                    </button> 
 
-            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#persProfileModal" id="${db[i].id}" onclick="showPerson(event, ${JSON.stringify(db[i]).split('"').join("&quot;")})">
-            <img src="img/person-lines-fill.svg">
-            </button> 
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editPersModal"  id="${db[i].id}"   onclick="editPerson(event, ${JSON.stringify(db[i]).split('"').join("&quot;")})"> 
+                    <img src="css/pen.svg">
+                    </button>
+                    
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"  data-target="#deletePersModal"   id="${fullDelName}"  onclick="deletePerson(event, ${db[i].id})">
+                    <img src="img/trash-fill.svg"  >
+                    </button>
+                </div>
 
-            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editPersModal"  id="${db[i].id}"   onclick="deleteEmployee(event, ${JSON.stringify(db[i]).split('"').join("&quot;")})"> 
-            <img src="css/pen.svg">
-            </button>
-            
-            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"  data-target="#deletePersModal"   id="${fullDelName}"  onclick="deletePerson(event, ${db[i].id})">
-            <img src="img/trash-fill.svg"  >
-            </button>
+         
 
          
             </td>
@@ -279,12 +282,12 @@ function getDeparments() {
 
 
 // Start Update Employee
-// check department dependancy 
+
 function editPerson(e, profile) {
     document.forms['editPersonnel']['id-edit'].value = profile.id;
     $('#firstname-edit').val(profile.firstName);
     $('#lastname-edit').val(profile.lastName);
-    $('#jobTitleHeader').val(profile.jobTitle);
+    // $('#jobTitle-edit').val(profile.jobTitle);
     $('#email-edit').val(profile.email);
     let dropdownEdit = $('#depDropdown-edit');
 
@@ -300,7 +303,7 @@ function editPerson(e, profile) {
                 return obj.name === profile.department;
             })[0]
 
-            console.log(result);
+            // console.log(result);
 
             //populate edit department dropdown
             if (response) {
@@ -350,11 +353,15 @@ $("#editPersonnel").submit(function (e) {
                 buildTable();
 
                 setTimeout(function () { $('#forgot-form').modal('hide'); }, 4000);
+                displayAlert('#editAlertPers', 'Person updated successfully!');
 
-            }
+            },
+             error: function(err) {
+                 console.log("ERROR uPDATE employee!")
+                 console.log(err);
+             }
         });
 
-        displayAlert('#editAlertPers', 'Person updated successfully!');
     }
 
 });

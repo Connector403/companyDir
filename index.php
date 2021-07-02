@@ -400,6 +400,8 @@
                 <input type="text" name="firstname" id="firstname-edit" class="form-control">
                 <label for="lastname-edit" class="form-label">Last Name</label>
                 <input type="text" name="lastname" id="lastname-edit" class="form-control">
+                <label for="jobTitle-edit">Job Title</label>]
+                <input type="text" class="form-control" id="jobTitle-edit">
                 <label for="email-edit" class="form-label">Email Address</label>
                 <input type="email" name="email" id="email-edit" class="form-control">
                 <label for="depDropdown-edit" class="form-label">Department</label>

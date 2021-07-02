@@ -490,11 +490,11 @@ th {
 
 
 /* aligning actions buttons horizontally  */
-.tile_div button {
+/* .tile_div button {
     display: block;
     float: left;
     height: 50px;
-    width: 100px;
+    width: 50px;
     margin-right: 5px;
 
     text-align: center;
@@ -502,6 +502,21 @@ th {
     text-decoration: none;
 }
 
+
+.tile_div {
+	text-align: center;
+}
 .title_div button.last {
     margin-right: 0;
+} */
+
+
+
+.center button{
+	flex:1;
+
+}
+
+.center {
+	display: flex;
 }
