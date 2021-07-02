@@ -34,7 +34,30 @@
 
 	// $_REQUEST used for development / debugging. Remember to cange to $_POST for production
 
-	$query = 'INSERT INTO department (name, locationID) VALUES("' . $_REQUEST['name'] . '",' . $_REQUEST["locationID"] . ')';
+	$depID = $_REQUEST['dep-edit'];
+	$depEdit = $_REQUEST['dep-edit-name'];
+	//$depLocEdit = $_REQUEST['dep-location-edit'];
+
+	//check if there is a dep with the new name
+	$query_check = "SELECT * FROM department WHERE name='$depEdit' AND id <> '$depID'";
+
+	$result_check = $conn->query($query_check);
+
+	if(mysqli_num_rows($result_check)>=1){
+
+		$output['status']['code'] = "200";
+		$output['status']['name'] = "ok";
+		$output['status']['description'] = "query failed";	
+		$output['data'] = [1];
+
+		mysqli_close($conn);
+
+		echo json_encode($output);
+	
+	} else {
+
+
+    $query = 'UPDATE department SET name = "'. $_REQUEST["dep-edit-name"] . '", locationID = "'. $_REQUEST["dep-location-edit"] . '" WHERE id= ' . $_REQUEST["dep-edit"] . ';';
 
 	$result = $conn->query($query);
 	
@@ -62,5 +85,7 @@
 	mysqli_close($conn);
 
 	echo json_encode($output); 
+
+}
 
 ?>

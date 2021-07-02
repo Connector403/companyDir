@@ -1,8 +1,7 @@
 <?php
 
 	// example use from browser
-	// use insertDepartment.php first to create new dummy record and then specify it's id in the command below
-	// http://localhost/companydirectory/libs/php/deleteDepartmentByID.php?id= <id>
+	// http://localhost/companydirectory/libs/php/insertDepartment.php?name=New%20Department&locationID=1
 
 	// remove next two lines for production
 	
@@ -35,30 +34,27 @@
 
 	// $_REQUEST used for development / debugging. Remember to cange to $_POST for production
 
-	$locDel ="";
+	$location = $_REQUEST['loc-name-edit'];
+	$id = $_REQUEST['loc-select-edit'];
 
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		$locDel = test_input($_POST["loc-del"]);
-	}
-
-	function test_input($data) {
-	$data = trim($data);
-	$data = stripslashes($data);
-	$data = htmlspecialchars($data);
-	return $data;
-	}
-
-	//$locDel = $_REQUEST['loc-del'];
-
-	$query_check = 'SELECT count(id) as dp FROM department WHERE locationID='. $locDel;
+	$query_check = "SELECT * FROM location WHERE name='$location' AND id <> '$id'";
 
 	$result_check = $conn->query($query_check);
 
-	$row = $result_check->fetch_row();
+	if(mysqli_num_rows($result_check)>=1){
 
-	if($row[0]==0){
+		$output['status']['code'] = "200";
+		$output['status']['name'] = "ok";
+		$output['status']['description'] = "query failed";	
+		$output['data'] = [1];
 
-		$query = 'DELETE FROM location WHERE id = ' . $locDel;
+		mysqli_close($conn);
+
+		echo json_encode($output);
+	
+	} else {
+		
+		$query = 'UPDATE location SET name = "'. $_REQUEST["loc-name-edit"] . '" WHERE id= ' . $_REQUEST["loc-select-edit"] . ';';
 
 		$result = $conn->query($query);
 		
@@ -87,19 +83,8 @@
 	
 		echo json_encode($output); 
 
-	} else {
-
-			$output['status']['code'] = "200";
-			$output['status']['name'] = "ok";
-			$output['status']['description'] = "location has dependencies";
-			$output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";	
-			$output['data'] = $row[0];
-	
-			mysqli_close($conn);
-	
-			echo json_encode($output); 
 	}
 
-	
+    
 
 ?>

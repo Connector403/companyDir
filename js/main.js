@@ -1,5 +1,4 @@
 // Global Variables
-
 let employeeID;
 
 let profile = {
@@ -15,32 +14,50 @@ let tempDeleteID = 0;
 let tempFullName = '';
 let tempDeleteLocationName = '';
 
+
+
+let firstNameHeader = '';
+let lastNameHeader = '';
+let jobTitleHeader = '';
+let departmentIDHeader = '';
+let emailHeader = '';
+
 $(document).ready(function () {
+
+    //Preloader
+    preloaderFadeOutTime = 500;
+    function hidePreloader() {
+        var preloader = $('.spinner-wrapper');
+        preloader.fadeOut(preloaderFadeOutTime);
+    }
+    hidePreloader();
     // <!-- Menu Toggle Script -->
     $('[data-toggle="tooltip"]').tooltip();
 
     // Select/Deselect checkboxes
     var checkbox = $('table tbody input[type="checkbox"]');
     $("#selectAll").click(function () {
-      if (this.checked) {
-        checkbox.each(function () {
-          this.checked = true;
-        });
-      } else {
-        checkbox.each(function () {
-          this.checked = false;
-        });
-      }
+        if (this.checked) {
+            checkbox.each(function () {
+                this.checked = true;
+            });
+        } else {
+            checkbox.each(function () {
+                this.checked = false;
+            });
+        }
     });
     checkbox.click(function () {
-      if (!this.checked) {
-        $("#selectAll").prop("checked", false);
-      }
+        if (!this.checked) {
+            $("#selectAll").prop("checked", false);
+        }
     });
 
     buildTable();
     getDeparments();
     // getDeparmentsUpdateProfile();
+
+
 
 });
 
@@ -48,8 +65,22 @@ $(document).ready(function () {
 $("#menu-toggle").click(function (e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
-  });
+});
 
+
+
+$(window).scroll(function () {
+    var scrollTop = $(this).scrollTop();
+
+    $('th').css({
+        opacity: function () {
+            var elementHeight = $(this).height(),
+                opacity = ((1 - (elementHeight - scrollTop) / elementHeight) * 0.8) + 0.2;
+
+            return opacity;
+        }
+    });
+});
 
 
 
@@ -59,12 +90,13 @@ function clearTable() {
     <tbody>
         <tr id="tableHeader">
             <th scope="col"  >Action</th>
-            <th scope="col">Display Name</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Second Name</th>
             <th scope="col" class="hideCell" id="jobTitleHeader">Job Title</th>
             <th scope="col" class="hideCell">Email</th>
             <th scope="col" class="hideCell" id="departmentHeader">Department</th>
             <th scope="col" class="hideCell" id="locationHeader">Location</th>
-            <th scope="col" class="hideCell" >ID</th>
+          
        
         </tr>
     </tbody>
@@ -72,20 +104,40 @@ function clearTable() {
 }
 
 
+// data-toggle="modal" data-id="${db[i].id}" data-target="#profileModal" onclick="loadProfile(${JSON.stringify(db[i]).split('"').join("&quot;")})"
+var regExName = /^([a-zA-Z _-]+)$/;
+var regExEmail = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+
+
+
+//display alert function
+function displayAlert(id, message) {
+    $(id).html(message);
+    $(id).css("display", "block");
+    //setInterval(function(){$(id).fadeOut();}, 3000);
+    $(id).delay(6200).fadeOut(300);
+}
+
 // function will be used in to buildTable()
 function appendEntry(db, i, filterBy) {
-
-    
+    var fullDelName = ` ${db[i].firstName}-${db[i].lastName}`
     $('#database tbody').append(`
-        <tr data-toggle="modal" data-id="${db[i].id}" data-target="#profileModal" onclick="loadProfile(${JSON.stringify(db[i]).split('"').join("&quot;")})">
-            <td style='white-space: nowrap'>
-            
-            <button type="button" id="${db[i].id}" class="btn=btn-secondary"> 
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16"> Details
-                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                </svg> 
+        <tr>
+            <td class="tile_div"> 
+
+            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#persProfileModal" id="${db[i].id}" onclick="showPerson(event, ${JSON.stringify(db[i]).split('"').join("&quot;")})">
+            <img src="img/person-lines-fill.svg">
             </button> 
-                
+
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editPersModal"  id="${db[i].id}"   onclick="deleteEmployee(event, ${JSON.stringify(db[i]).split('"').join("&quot;")})"> 
+            <img src="css/pen.svg">
+            </button>
+            
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"  data-target="#deletePersModal"   id="${fullDelName}"  onclick="deletePerson(event, ${db[i].id})">
+            <img src="img/trash-fill.svg"  >
+            </button>
+
+         
             </td>
             <td><b> ${db[i].firstName}</b></td>
             <td><b>${db[i].lastName}</b> 
@@ -94,11 +146,12 @@ function appendEntry(db, i, filterBy) {
             <td class=${(filterBy == "department") ? "" : "hideCell"}>${db[i].department}</td>
             <td class=${(filterBy == "location") ? "" : "hideCell"}>${db[i].location}</td>
            
-            <th class="hideCell">${db[i].id}</th>
+            
         </tr>
     `)
-
 }
+
+
 
 // 
 function buildTable() {
@@ -125,189 +178,81 @@ function buildTable() {
     })
 }
 
+function checkForEmployees(departmentID) {
+    return $.ajax({
+        url: "php/check-emp.php",
+        method: "POST",
+        dataType: 'json',
+        data: {
+            'depID': departmentID
+        },
+        success: function (data) {
+            // console.log(data)
+            return data
+        }
+    });
+}
 
-function loadProfile(profile) {
-    tempDeleteID = profile.id;
-    tempFullName = `profile.firstName  profile.lastName`;
-    $('#profileModal').css("display", "block");
-  
-   
 
-    $('#displayName').children().text(`${profile.firstName}  ${profile.lastName}`);
-    $('#id').text(profile.id);
-    $('#firstName').text(profile.firstName);
-    $('#lastName').text(profile.lastName);
-    $('#jobTitle').text(profile.jobTitle);
-    $('#email').text(profile.email);
-    $('#department').text(profile.department);
-    $('#location').text(profile.location);
+// Employee Profile Modal
 
-    $('.deleteCellROW').html(`
-    <button  id="${profile.id}" type="button"  data-toggle="modal" data-target="#deleteEmpModal"class="btn btn-outline-danger deleteCellButton" on-click="toggleDeleteEmp()" data-dismiss="modal">
-    Delete record
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x-fill" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6.146-2.854a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
-            </svg> 
-    </button> `);
- 
+function showPerson(e, profile) {
+    $('#displayProfileNameHead').html(`${profile.firstName}  ${profile.lastName}`);
+    $('#jobTitleHead').html(profile.department);
+    $('#firstNameShow').html(`${profile.firstName}  ${profile.lastName}`);
+    $('#emailShow').html(profile.email);
+    $('#departmentShow').html(profile.department);
+    $('#jobTitleShow').html(profile.jobTitle);
+    $('#locationShow').html(profile.location);
 
 }
-// Start update Profile 
 
 
-$('#updateButton').click(function(){
-    // toggleProfileUpdate();
-    updateProfileInfo();
+
+//Add Employee
+$('.addPersButton').on('click', function () {
+    populateDep();
 })
 
-// when update button is pressedn on profile modal 
-function toggleProfileUpdate() {
 
-    if ($('#updateButton').text() == "Save") {
-        updateProfileInfo();
-        $('.alert').hide();
-    } else  {
+$("#addPersonnel").submit(function (e) {
 
-        saveProfile();
-
-    }
-}
-
-
-
-
-// 
-function updateProfileInfo() {
-    $('#updateButton').text("Update");
-    $('.alert').hide();
-
-    for (let i = 2; i < 7; i++) {
-        // let entryUpdate = $('#profileUpdate').children().eq(i).children().eq(1);
-        // let idUpdate = entryUpdate.attr('id');
-        let entry = $('#profile').children().eq(i).children().eq(1);
-        let entryText = entry.text();
-        let id = entry.attr('id');
-
-        profile[id] = entryText;
-
-        if (i < 6) {
-            // replace everything other than department and location 
-            entry.replaceWith(`<input id='${id}' placeholder='${entryText}'>`);
-
-        } else {
-            // update Department and location 
-            entry.replaceWith(`<select onchange="updateLocation()" id='${id}'></select>`);
-
-            populateSelectOptions('Department', id);
-            $(`#${id}`).append(`<option selected="true">${entryText}</option>`)
+    if ($('#depDropdown-add').val() == null) {
+      e.preventDefault();
+      displayAlert('#addAlertPers', 'Please select a department!');
+    } else if ($('#firstname').val() == "" || $('#lastname').val() == "" || $('#email').val() == "") {
+      e.preventDefault();
+      displayAlert('#addAlertPers', 'Please complete all fields!');
+    } else if (!regExName.test($('#firstname').val()) || !regExName.test($('#lastname').val())) {
+      e.preventDefault();
+      displayAlert('#addAlertPers', 'Please only use letters, spaces, dashes or underscores for names!');
+    } else {
+  
+      e.preventDefault();
+  
+      var form = $(this);
+      console.log(form);
+  
+      $.ajax({
+        type: "POST",
+        url: "php/addProfile.php",
+        data: form.serialize(),
+        success: function (data) {
+          console.log(form.serialize());
+          populateDep();
+          clearTable();
+          buildTable();
         }
+      });
+      displayAlert('#addAlertPers', 'Person added successfully!');
+      $('#firstname').val('');
+      $('#lastname').val('');
+      $('#email').val('');
+      $('#jobTitle').val('');
     }
-}
-
-
-
-function updateLocation() {
-    $.getJSON(`php/getAllDepartments.php`, function (departments) {
-        let locationID = departments.data.filter(dep => dep.name == $('#department').val())[0].locationID
-
-        $.getJSON(`php/getAllLocations.php`, function (locations) {
-            let location = locations.data.filter(loc => loc.id == locationID)[0].name
-            $('#location').text(location)
-
-        })
-
-    })
-
-}
-function saveProfile() {
-    $('#updateButton').text("Update")
-
-    for (let i = 2; i < 7; i++) {
-        let entryUpdate = $('#profile').children().eq(i).children().eq(1);
-        let entryText = entryUpdate.val();
-        let id = entryUpdate.attr('id');
-
-        if (entryText) {
-            profile[id] = entryText;
-        }
-        entryUpdate.replaceWith(`<span class='col-7 col-sm-6' id='${id}'>${profile[id]}</span>`);
-    }
-    $('#displayName').children().text(`${profile.firstName} ${profile.lastName}`)
-
-    loadUpdateProfile();
-
-}
-
-function updateSuccessMessage(){
-
-
-    
-
-   
-
-}
-
-
-//submitting data
-//submitting data
-function loadUpdateProfile() {
-
-    $.getJSON('php/getAllDepartments.php', function (departments) {
-        let depID = departments.data.filter(dep => dep.name == profile.department)[0].id;
-        console.log(depID);
-
-
-        $.ajax({
-            url: 'php/updateProfile.php',
-            dataType: 'json',
-            data: {
-                'id': parseInt($('#id').text()),
-                'firstName': profile.firstName,
-                'lastName': profile.lastName,
-                'jobTitle': profile.jobTitle,
-                'email': profile.email,
-                'departmentID': depID
-
-            },
-            success: function (data) {
-
-                $('#profile').hide();
-                $('#updateButton').hide();
-                clearTable();
-                buildTable();
-                $('#profilemodalBody').html(`<div class="alert alert-success">
-                    <h4 class="alert-heading">Successful Update </h4>
-                    <p> You have successfully Update the ${profile.firstName} ${profile.lastName}'s record!</p>
-                    <hr>
-                    <p class="mb-0"> You can now return the menu </p>
-                </div>`)
-            
-            },
-            error: function (error) {
-                $('#profile').hide();
-                $('#updateButton').hide();
-                $('#profilemodalBody').html(`<div class="alert alert-success">
-                <h4 class="alert-heading">Successful Update </h4>
-                <p> You have successfully Update the ${profile.firstName} ${profile.lastName}'s record!</p>
-                <hr>
-                <p class="mb-0"> You can now return the menu </p>
-            </div>`);
-                clearTable();
-                buildTable();
-     
-             
-               
-            }
-        })
-    })
-
-
-}
-// End Of update Profile
-
-
-
-
+  
+  });
+  
 
 function getDeparments() {
 
@@ -326,211 +271,197 @@ function getDeparments() {
                 option +=
                     '<option value"' + db[i].id + '"> ' + db[i].name + '</option>';
             }
-            $('#addEmployeeDepartment').append(option).select2();
+            $('#depDropdown-add').append(option).select2();
 
         }
     })
 }
 
-function PrepareDeleteForm(){
 
-    $('#modalTitle').html('Delete Employee');
-    $('#yesButton').show();
-    $('#noButton').show();
-}
+// Start Update Employee
+// check department dependancy 
+function editPerson(e, profile) {
+    document.forms['editPersonnel']['id-edit'].value = profile.id;
+    $('#firstname-edit').val(profile.firstName);
+    $('#lastname-edit').val(profile.lastName);
+    $('#jobTitleHeader').val(profile.jobTitle);
+    $('#email-edit').val(profile.email);
+    let dropdownEdit = $('#depDropdown-edit');
 
-
-function toggleDeleteEmp( ) {
-    let empDeleteID = $('.deleteCellButton').attr('id');
-
-
-
-    $('#deleteText').html(`Are you sure You would like to delete <strong>${tempFullName}</strong> from the system `);
-
-}
-
-function deleteEmployee() {
+    dropdownEdit.empty();
     $.ajax({
-        url: 'php/deleteEmployee.php',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            'employeeID': tempDeleteID,
+        type: 'GET',
+        url: "php/getAllDepartments.php",
+        success: function (response) {
+
+            // console.log(response);
+            //get data for department dropdown
+            var result = response['data'].filter(obj => {
+                return obj.name === profile.department;
+            })[0]
+
+            console.log(result);
+
+            //populate edit department dropdown
+            if (response) {
+                for (let item of response['data']) {
+                    if (result.id == item.id) {
+                        dropdownEdit.append($('<option selected="true"></option>').attr('value', item.id).text(item.name));
+                    } else {
+                        dropdownEdit.append($('<option></option>').attr('value', item.id).text(item.name));
+                    }
+                }
+            }
+
+
         },
-        success: function (){ 
+    }).fail(function () {
+        console.log("Error encountered!")
+    });
 
-            $('#deleteText').html('Employee have been deleted Successfully!');
-            $('#deleteCompleteSymbol').show();
-            $('#yesButton').hide();
-            $('#noButton').html("Close");
-            console.log(`employee ${tempFullName} deleted`);
-            clearTable();
-            buildTable();
 
-        }
-    })
 }
 
-$('#addEmployButtons').click(function() {
-    $( "div.success" ).fadeIn( 300 ).delay( 1500 ).fadeOut( 400 );
-})
+// update form submit
+$("#editPersonnel").submit(function (e) {
 
-function addEmployee() {
+    if ($('#firstname-edit').val() == "" || $('#lastname-edit').val() == "" || $('#email-edit').val() == "") {
+        e.preventDefault();
+        displayAlert('#editAlertPers', 'Please complete all fields!');
+    } else if (!regExName.test($('#firstname-edit').val()) || !regExName.test($('#lastname-edit').val())) {
+        e.preventDefault();
+        displayAlert('#editAlertPers', 'Please only use letters, spaces, dashes or underscores for names!');
+    } else {
 
-    let departmentName = $('#addEmployeeDepartment').val()
-    let firstName =  $('#addEmployeeFirstName').val();
-    let lastName = $('#addEmployeeLastName').val();
+        e.preventDefault();
+        //$('#editPersModal').modal('hide');
 
-    $.getJSON(`php/getAllDepartments.php`, function (departments) {
-        let departmentID = departments.data.filter(dep => dep.name == departmentName)[0].id
+        var form = $(this);
 
         $.ajax({
-            data: {
-                'firstName': $('#addEmployeeFirstName').val(),
-                'lastName': $('#addEmployeeLastName').val(),
-                'jobTitle': $('#addEmployeeJobTitle').val(),
-                'email': $('#addEmployeeEmail').val(),
-                'departmentID': departmentID
-            },
-            url: 'php/addProfile.php',
-            dataType: 'json',
+            type: "POST",
+            url: "php/updateProfile.php",
+            data: form.serialize(),
             success: function (data) {
-        
-      
-          
+                // console.log(data);
+                console.log("HAPYY DAYS");
+                console.log(form);
+                clearTable();
+                buildTable();
 
-
-                clearTable()
-
-                $('#addEmployeeFirstName').val("")
-                $('#addEmployeeLastName').val("")
-                $('#addEmployeeJobTitle').val("")
-                $('#addEmployeeEmail').val("")
-                $('#addEmployeeDepartment').find('option:eq(0)').prop('selected', true);
-
-                $.when($.ajax(
-                    buildTable()
-                ))
-
+                setTimeout(function () { $('#forgot-form').modal('hide'); }, 4000);
 
             }
-        })
+        });
+
+        displayAlert('#editAlertPers', 'Person updated successfully!');
+    }
+
+});
+// End Of update Profile
+
+
+// delete Employee
+
+
+
+function deletePerson(e, id) {
+
+    var event = e;
+    document.forms['deletePerson']['persDelID'].value = id;
+    $('#deletePerson').submit(function (e) {
+        // event.parentNode.parentNode.parentNode.removeChild(event.parentNode.parentNode);
+        e.preventDefault();
+        $('#deletePerson').unbind();
+        var form = $(this);
+        $.ajax({
+            url: 'php/deleteEmployee.php',
+            type: 'POST',
+            data: form.serialize(),
+            success: function () {
+
+                console.log(id);
+                // clearTable();
+                // buildTable();
+
+            }
+        }).fail(function () {
+            console.log("erorr on delete!")
+        });
+
+        displayAlert('#delAlertPers', 'Person Delete Successfully');
+
 
     })
 
+
 }
 
+// populate location select on department adding 
 
-
-function clearTable() {
-
-    $('#database').html(`
-    <tbody>
-        <tr id="tableHeader">
-            <th scope="col" class="hideCell" >Action</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col" class="hideCell" id="jobTitleHeader">Job Title</th>
-            <th scope="col" class="hideCell">Email</th>
-            <th scope="col" class="hideCell" id="departmentHeader">Department</th>
-            <th scope="col" class="hideCell" id="locationHeader">Location</th>
-            <th scope="col" class="hideCell" >ID</th>
-            
-        </tr>
-    </tbody>
-    `)
-}
-
-
-$('#toggleAddDepartmentButton').click(function(){
+$('#toggleAddDepartmentButton').click(function () {
     populateSelectOptions('Location', "addDepartmentLocation");
 })
 
 
-
-$('#toggleRemoveDepartmentButton').click(function(){
+// Delete department populate select drop down
+$('#delDepModal').click(function () {
     populateSelectOptions('Department', "removeDepartmentDepartment");
 })
-// function toggleAddDepartment() {
-    
-// }
 
-// function toggleRemoveDepartment() {
-    
-// }
-// function toggleDeleteLocation() {
- 
-   
-// }
 
-$('#toggleDeleteLocationButton').click(function(){
-    populateSelectOptions('Location', 'deleteLocationName');
 
-})
 
 // searcgh
-$('#search_button').click(function(){
+$('#search_button').click(function () {
     search();
 })
 
 
-$('#closeModalProfileButton').click(function(){
+$('#closeModalProfileButton').click(function () {
     return location.reload();
 })
 
-$('#noButtonAddeDpartment').click(function() {
+$('#noButtonAddeDpartment').click(function () {
     return location.reload();
-})
-$('#addEmployButtons').click(function(){
-    addEmployee();
 })
 
 // Delete Profile Modal Confirmatioon
-$('#yesButton').click(function(){
+$('#yesButton').click(function () {
     deleteEmployee();
 })
 
-// Remove Departments 
-$('#toggleDeleteDepartmentConfirmButton').click(function(){
-    toggleDeleteDepartmentConfirm();
-
-})
-
-// Confirm Remove Department Modal 
-$('#yesButtonDepartment').click(function(){
-    deleteDepartment();
-})
 
 
 // add location 
-$('#addLocationButton').click(function(){
+$('#addLocationButton').click(function () {
     createLocation();
 })
 
-// remove location 
-$('#toggleDeleteLocationConfirmButton').click(function(){
+// delete4 location 
+$('#toggleDeleteLocationConfirmButton').click(function () {
     toggleDeleteLocationConfirm();
 })
 
-// confirm Delete Location 
+// confirm deltete Location 
 
-$('#yesButtonLocation').click(function(){
+$('#yesButtonLocation').click(function () {
     deleteLocation();
 })
 
-$('#toggleAddDepartmentConfirmButton').click(function() {
+$('#toggleAddDepartmentConfirmButton').click(function () {
     $('#addTextDepartment').html("Are you sure you want to add a new dapartment?");
 })
 
 // adding Department 
-$('#yesButtonAddDepartment').click(function(){
+$('#yesButtonAddDepartment').click(function () {
     $('#departmentModalBody').hide();
     let departmentName = $('#addDepartmentDepartment').val();
     let locationName = $('#addDepartmentLocation').val();
     $.getJSON(`php/getAllLocations.php`, function (locations) {
         let locationID = locations.data.filter(loc => loc.name == locationName)[0].id
 
-        
+
         $.ajax({
             data: {
                 'name': departmentName,
@@ -547,11 +478,11 @@ $('#yesButtonAddDepartment').click(function(){
                 // tempDeleteLocationName = $('#deleteLocationName').val();
                 $('#yesButtonAddDepartment').hide();
                 $('#noButtonAddeDpartment').html("Close");
-               
+
                 $('#addCompleteSymbolDepartment').show();
                 console.log(`Location ${departmentName} Added`);
-            
-           
+
+
 
 
                 $('#removeDepartmentDepartment').find('option:eq(0)').prop('selected', true);
@@ -564,59 +495,155 @@ $('#yesButtonAddDepartment').click(function(){
 })
 
 
-function toggleDeleteDepartmentConfirm(){
-    $('#deleteTextDepartment').html('Are you sure you want to delete the record from the database?');
-    // console.log(tempDeleteLocationName);
-    $('.successModalSymbol').hide();
-}
+// function toggleDeleteDepartmentConfirm() {
+//     $('#deleteTextDepartment').html('Are you sure you want to delete the record from the database?');
+//     // console.log(tempDeleteLocationName);
+//     $('.successModalSymbol').hide();
+// }
+//Populate the location select list
+function populateLoc() {
+    let dropdownAddLocation = $('.locDropdown');
 
+    dropdownAddLocation.empty();
+    dropdownAddLocation.append('<option selected="true" value="dummy" disabled>Choose location</option>');
+    dropdownAddLocation.prop('selectedIndex', 0);
 
-function deleteDepartment() {
-    let departmentName = $('#removeDepartmentDepartment').val();
+    $.ajax({
+        type: 'GET',
+        url: "php/getAllLocations.php",
+        success: function (response) {
 
-    $.getJSON(`php/getAllDepartments.php`, function (departments) {
-        let departmentID = departments.data.filter(dep => dep.name == departmentName)[0].id;
-        console.log(departmentID);
+            //console.log(response);
 
-        $.ajax({
-            url: 'php/deleteDepartmentByID.php',
-            data: {
-                'id': departmentID,
+            response['data'].sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
 
-            },
-            dataType: 'json',
-            success: function (data) {
-                clearTable();
-                buildTable();
-                $('#deleteTextDepartment').html(`<strong>${departmentName}</strong> has been deleted successfully`);
-                tempDeleteLocationName = $('#deleteLocationName').val();
-                $('#yesButtonDepartment').hide();
-                $('#noButtonDepartment').html("Close");
-               
-                $('#deleteCompleteSymbolDepartment').show();
-                console.log(`Location ${departmentName} deleted`);
-                console.log(departmentName);
-           
-
-
-                $('#removeDepartmentDepartment').find('option:eq(0)').prop('selected', true);
-                console.log('Success Delete');
-            },
-            error: function (dataaaaaaaaaa) {
-                console.log(data);
+            if (response) {
+                for (let item of response['data']) {
+                    dropdownAddLocation.append($('<option></option>').attr('value', item.id).text(item.name));
+                }
             }
 
-        })
 
+        },
+    }).fail(function () {
+        console.log("Error encountered!")
     });
 }
 
 
-$('#addLocationButton').click(function(){
+$('#toggleRemoveDepartment').on('click', function () {
+    populateDep();
+})
+
+//Delete department
+$('#delDepBtn').on('click', function () {
+    if ($('#dep-del').val() == null) {
+
+        displayAlert('#delAlertDep', "Please select a department!");
+    } else {
+        $('#delAlertDep').html('Are you sure you want to delete the department?');
+        $('#delAlertDep').css("display", "block");
+        $('#delDepBtn').hide();
+        $('#delDepCnfBtn').show();
+    }
+});
+
+$("#deleteDep").submit(function (e) {
+
+    e.preventDefault();
+    var form = $(this);
+    $.ajax({
+        type: "POST",
+        url: "php/deleteDepartmentByID.php",
+        data: form.serialize(),
+        success: function (response) {
+            console.log(response);
+            if (response['data'].length != 0) {
+                displayAlert('#delAlertDep', "Department field contains other records!");
+                $('#delDepBtn').show();
+                $('#delDepCnfBtn').hide();
+            }
+            populateDep();
+            clearTable();
+            buildTable();
+        }
+    });
+    displayAlert('#delAlertDep', "Department deleted successfully!");
+    $('#delDepBtn').show();
+    $('#delDepCnfBtn').hide();
+
+
+}
+
+);
+
+$('#addLocationButton').click(function () {
     $('#addLocationBody').hide();
     $('#addLocationButton').hide();
 })
 
+
+// edit Department 
+
+//Update location
+$('#toggleEditDep').on('click', function () {
+    populateDep();
+    populateLoc();
+})
+
+
+//Update department
+$("#dep-edit").change(function () {
+    $('#dep-edit-name').val($(this).children(':selected').text());
+    var option = $('option:selected', this).attr('data-loc');
+    $('#dep-location-edit').val(option);
+});
+
+
+$("#editDep").submit(function (e) {
+
+    if ($('#dep-edit').val() == null) {
+        e.preventDefault();
+        displayAlert('#editAlertDep', "Please select a department!");
+    } else if ($('#dep-location-edit').val() == null) {
+        e.preventDefault();
+        displayAlert('#editAlertDep', "Please select a location!");
+    } else if ($('#dep-edit-name').val() == "") {
+        e.preventDefault();
+        displayAlert('#editAlertDep', 'Please complete all fields!');
+    } else if (!regExName.test($('#dep-edit-name').val())) {
+        e.preventDefault();
+        displayAlert('#editAlertDep', 'Please only use letters, spaces, dashes or underscores for names!');
+    } else {
+
+        e.preventDefault();
+
+
+        var form = $(this);
+
+        $.ajax({
+            type: "POST",
+            url: "php/updateDepartment.php",
+            data: form.serialize(),
+            success: function (response) {
+                //console.log(response);
+                if (response['data'].length != 0) {
+                    displayAlert('#editAlertDep', "Department already exists!");
+                }
+                populateDep();
+                populateLoc();
+                clearTable();
+                buildTable();
+            }
+        });
+        displayAlert('#editAlertDep', "Department updated successfully!");
+        $('#dep-edit-name').val('');
+
+    }
+
+});
+
+/// add location 
 function createLocation() {
 
 
@@ -634,7 +661,7 @@ function createLocation() {
             <hr>
             <p class="mb-0"> You can now return the menu </p>
             </div>`);
-         
+
             $('#addLocationButton').hide();
             console.log("Success Location created ");
         }
@@ -642,38 +669,102 @@ function createLocation() {
 
 }
 
-function deleteLocation() {
-    let locationName = $('#deleteLocationName').val();
-    tempDeleteLocationName 
+// edit location 
+$('#toggleEditLocation').on('click', function () {
+    populateLoc();
+})
+
+$("#loc-select-edit").change(function () {
+    $('#loc-name-edit').val($(this).children(':selected').text());
+});
+
+$("#editLoc").submit(function (e) {
+
+    if ($('#loc-select-edit').val() == null) {
+        e.preventDefault();
+        displayAlert('#editAlertLoc', "Please select a location!");
+    } else if ($('#loc-name-edit').val() == "") {
+        e.preventDefault();
+        displayAlert('#editAlertLoc', 'Please complete all fields!');
+    } else if (!regExName.test($('#loc-name-edit').val())) {
+        e.preventDefault();
+        displayAlert('#editAlertLoc', 'Please only use letters, spaces, dashes or underscores for names!');
+    } else {
+
+        e.preventDefault();
+
+
+        var form = $(this);
+
+        $.ajax({
+            type: "POST",
+            url: "php/updateLocation.php",
+            data: form.serialize(),
+            success: function (response) {
+                //console.log(response);
+                if (response['data'].length != 0) {
+                    displayAlert('#editAlertLoc', "Location already exists!");
+                }
+                populateLoc();
+                clearTable();
+                buildTable();
+            }
+        });
+        displayAlert('#editAlertLoc', "Location updated successfully!");
+        $('#loc-name-edit').val('');
+
+    }
+
+});
+
+
+$('#toggleDeleteLocationButton').click(function () {
+    // populateSelectOptions('Location', 'deleteLocationName');
+    populateLoc();
+
+})
+
+//Delete location
+$('#delLocBtn').on('click', function () {
+    if ($('#loc-del').val() == null) {
+
+        displayAlert('#delAlertLoc', "Please select a location!");
+    } else {
+        $('#delAlertLoc').html('Are you sure you want to delete the department?');
+        $('#delAlertLoc').css("display", "block");
+        $('#delLocBtn').hide();
+        $('#delLocCnfBtn').show();
+    }
+});
+
+$("#deleteLoc").submit(function (e) {
+    e.preventDefault();
+    var form = $(this);
+
     $.ajax({
-        url: 'php/deleteLocationByID.php',
-        dataType: 'json',
-        data: {
-            'name': locationName
-        },
-        success: function (data) {
+        type: "POST",
+        url: "php/deleteLocationByID.php",
+        data: form.serialize(),
+        success: function (response) {
+            console.log(response);
+
+            if (response['data'].length != 0) {
+                displayAlert('#delAlertLoc', "Location field contains other records!");
+                $('#delLocBtn').show();
+                $('#delLocCnfBtn').hide();
+            }
+            populateLoc();
             clearTable();
             buildTable();
-            $('#deleteTextLocation').html(`${locationName} has been deleted successfully`);
-            tempDeleteLocationName = $('#deleteLocationName').val();
-            $('#yesButtonLocation').hide();
-            $('#noButtonLocation').html("Close");
-           
-            $('#deleteCompleteSymbolLocation').show();
-            console.log(`Location ${locationName} deleted`);
-            console.log(locationName);
-       
         }
+    });
+    displayAlert('#delAlertLoc', "Location deleted successfully!");
+    $('#delLocBtn').show();
+    $('#delLocCnfBtn').hide();
 
-    })
 }
+);
 
-function toggleDeleteLocationConfirm(){
-
-    $('#deleteTextLocation').html('Are you sure you want to delete the record from the database?');
-    // console.log(tempDeleteLocationName);
-    $('.successModalSymbol').hide();
-}
 
 
 
@@ -706,7 +797,7 @@ function contains(db, i, filterBy, searchText) {
 
 function search() {
     clearTable();
-    
+
     var filterBy = $('.filterSelect:first').val()
     var searchText = $('#search_box').val();
 
@@ -714,18 +805,50 @@ function search() {
         type: 'GET',
         url: 'php/getAll.php',
         dataType: 'json',
-        success: function(data) {
+        success: function (data) {
             let db = data.data;
             let numofEntries = 0;
 
-            for(let i in db) {
+            for (let i in db) {
                 numofEntries += contains(db, i, filterBy, searchText);
             }
             $('#numberOfEntries').html(numofEntries);
             $(`#${filterBy}Header`).removeClass();
-        
+
 
         }
     })
 
+}
+
+//Populate the departments select list
+function populateDep() {
+    let dropdownAdd = $('.depDropdown');
+
+    dropdownAdd.empty();
+    dropdownAdd.append('<option selected="true" value="dummy" disabled>Choose department</option>');
+    dropdownAdd.prop('selectedIndex', 0);
+
+    $.ajax({
+        type: 'GET',
+        url: "php/getAllDepartments.php",
+        success: function (response) {
+
+            console.log(response);
+
+            response['data'].sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+
+            //console.log(response['data']);
+
+            if (response) {
+                for (let item of response['data']) {
+                    dropdownAdd.append($('<option></option>').attr({ 'value': item.id, 'data-loc': item.locationID }).text(item.name));
+                }
+            }
+
+
+        },
+    }).fail(function () {
+        console.log("Error encountered!")
+    });
 }
