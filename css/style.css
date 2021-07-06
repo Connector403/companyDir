@@ -519,4 +519,9 @@ th {
 
 .center {
 	display: flex;
+
+}
+
+.center button {
+	margin-left: 2px;
 }
