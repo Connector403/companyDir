@@ -307,27 +307,6 @@
             </div>
             <div class="body-scroll">
               <div class="modal-body" id="addProfileBody">
-                <!-- <form method="post" action="#" id="addPersonnel">
-                  <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <label for="firstname">First Name</label>
-                      <input type="text" name="firstname" id="firstname" class="form-control">
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label for="lastname">Last Name</label>
-                      <input type="text" name="lastname" id="lastname" class="form-control">
-                    </div>
-                  </div>
-                  <div class="form-group"> 
-                    <label for="email">Email Address</label>
-                    <input type="email" name="email" id="email" class="form-control">
-                  </div>
-                  <div class="form-group"> 
-                    <label for="depDropdown-add">Department</label>
-                    <select id="depDropdown-add" name="department" class="form-control depDropdown">
-                    </select>
-                  </div>
-                </form> -->
                 <form method="post" action="#" id="addPersonnel">
                   <label for="firstname" >First Name</label>
                   <input type="text" name="firstname" id="firstname" class="form-control">
@@ -374,8 +353,8 @@
 
             </div>
             <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <input type="submit" name="submit" value="Delete" form="deletePerson" class="btn btn-danger">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
             </div>
           </div>
         </div>
@@ -411,8 +390,8 @@
               <span id="editAlertPers" class="alert"></span>
             </div>
             <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <input type="submit" name="submit" value="Save" form="editPersonnel" class="btn btn-primary">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
@@ -436,49 +415,27 @@
               </button>
             </div>
             <div class="modal-body" id="addDepartmentBody">
-              <div class="departmentModalBody">
-                <form method="post" accept="#" id="addDepartment">
-                  <div class="form-row">
-                    <lable for="addDepartmentDepartment">Department</lable>
-                    <input type="text" class="form-control" id="addDepartmentDepartment">
-                  </div>
-                  <div class="form-row">
-                    <label class="addDepartmentLocation"> Location</label>
-                    <select class="form-control" id="addDepartmentLocation"></select>
-                  </div>
-                </form>
-              </div>
+              <form id="createDep" method="POST" action="#" >
+                <lable for="dep-add-name">Department</lable>
+                <input type="text"  name="dep-name" class="form-control" id="dep-add-name">
+                <label for="dep-location-add">Location</label>
+                <select id="dep-location-add" name="dep-location-add" class="form-control locDropdown">
+                </select>
+              
+              </form>
+              <span id="addAlertDep" class="alert"></span>
+
             </div>
             <div class="modal-footer">
-              <button id="closeDepartment" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button id="toggleAddDepartmentConfirmButton" class="btn btn-primary" data-dismiss="modal"
-                data-toggle="modal" data-target="#confirmAddDepartmentModal">Create</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>  
+              <input type="submit" name="submit" value="Save" form="createDep" class="btn btn-primary" >
             </div>
           </div>
         </div>
       </div>
 
 
-      <!-- Confirm add Department  -->
-      <div class="modal" id="confirmAddDepartmentModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Add Department Confirmation </h5>
-            </div>
-            <div class="modal-body">
-              <p id="addTextDepartment"></p>
-              <i class="material-icons successModalSymbol" id="addCompleteSymbolDepartment">check_circle</i>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger" id="noButtonAddeDpartment" data-dismiss="modal"><i
-                  class="material-icons" id="cross">cancel</i> No</button>
-              <button type="button" class="btn btn-outline-danger" id="yesButtonAddDepartment"><i class="material-icons"
-                  id="tick">done</i> Yes</button>
-            </div>
-          </div>
-        </div>
-      </div>
+
 
       <!-- Edit Department -->
       <div class="modal fade" id="editDepModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -504,8 +461,8 @@
               <span id="editAlertDep" class="alert"></span>
             </div>
             <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <input type="submit" name="submit" value="Save" form="editDep" class="btn btn-primary">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
@@ -530,9 +487,9 @@
               <span id="delAlertDep" class="alert"></span>
             </div>
             <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <input type="submit" name="submit" value="Yes" form="deleteDep" class="btn btn-danger" id="delDepCnfBtn">
               <button type="button" class="btn btn-danger" id="delDepBtn">Delete</button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
@@ -597,8 +554,8 @@
 
             </div>
             <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <input type="submit" name="submit" value="Save" form="editLoc" class="btn btn-primary">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
@@ -627,9 +584,9 @@
 
             </div>
             <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <input type="submit" name="submit" value="Yes" form="deleteLoc" class="btn btn-danger" id="delLocCnfBtn">
               <button type="button" class="btn btn-danger" class="col-form-label-lg" id="delLocBtn">Delete</button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
